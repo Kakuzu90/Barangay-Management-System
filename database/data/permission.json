@@ -1,0 +1,116 @@
+[
+	{
+		"name": "Dashboard Index"
+	},
+	{
+		"name": "Purok Index"
+	},
+	{
+		"name": "Purok Store"
+	},
+	{
+		"name": "Purok Update"
+	},
+	{
+		"name": "Purok Delete"
+	},
+	{
+		"name": "Position Index"
+	},
+	{
+		"name": "Position Store"
+	},
+	{
+		"name": "Position Update"
+	},
+	{
+		"name": "Position Delete"
+	},
+	{
+		"name": "Purok Leader Index"
+	},
+	{
+		"name": "Purok Leader Store"
+	},
+	{
+		"name": "Purok Leader Update"
+	},
+	{
+		"name": "Purok Leader Delete"
+	},
+	{
+		"name": "Event Index"
+	},
+	{
+		"name": "Event Store"
+	},
+	{
+		"name": "Event Update"
+	},
+	{
+		"name": "Event Delete"
+	},
+	{
+		"name": "SMS Index"
+	},
+	{
+		"name": "Resident Index"
+	},
+	{
+		"name": "Resident Store"
+	},
+	{
+		"name": "Resident Update"
+	},
+	{
+		"name": "Resident Delete"
+	},
+	{
+		"name": "Barangay Official Index"
+	},
+	{
+		"name": "Barangay Official Store"
+	},
+	{
+		"name": "Barangay Official Update"
+	},
+	{
+		"name": "Barangay Official Delete"
+	},
+	{
+		"name": "Blotter Index"
+	},
+	{
+		"name": "Blotter Store"
+	},
+	{
+		"name": "Blotter Update"
+	},
+	{
+		"name": "Blotter Delete"
+	},
+	{
+		"name": "Transaction Index"
+	},
+	{
+		"name": "Clearance Certificate"
+	},
+	{
+		"name": "Birth Certificate"
+	},
+	{
+		"name": "Large Cattle Certificate"
+	},
+	{
+		"name": "Residence Certificate"
+	},
+	{
+		"name": "Residence Sports Certificate"
+	},
+	{
+		"name": "Profile Settings"
+	},
+	{
+		"name": "System Settings"
+	}
+]

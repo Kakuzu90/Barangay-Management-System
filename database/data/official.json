@@ -1,0 +1,9 @@
+[
+	{
+		"resident_id": 1,
+		"username": "admin",
+		"password": "password",
+		"position_id": 1,
+		"account_status": 2
+	}
+]
