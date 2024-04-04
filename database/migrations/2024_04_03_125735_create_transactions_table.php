@@ -16,7 +16,7 @@ class CreateTransactionsTable extends Migration
 		Schema::create('transactions', function (Blueprint $table) {
 			$table->id();
 			$table->foreignId('resident_id')->constrained()->cascadeOnDelete();
-			$table->foreignId('official_id')->constrained()->cascadeOnDelete();
+			$table->foreignId('official_id')->constrained("officials", "resident_id")->cascadeOnDelete();
 			$table->string('type');
 			$table->string('or_number');
 			$table->text('purpose');
