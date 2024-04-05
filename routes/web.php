@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(AuthController::class)->group(function () {
+
+	Route::get("", "index")->name("login");
+	Route::post("login/stored", "login")->name("login.stored");
+});
+
+Route::middleware("auth")->group(function () {
+
+	Route::get("logout", [AuthController::class, "logout"])->name("logout");
+	Route::get("dashboard", [DashboardController::class, "index"])->name("dashboard");
 });

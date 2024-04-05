@@ -23,6 +23,7 @@ class CreateOfficialsTable extends Migration
 			$table->date('term_to')->nullable();
 			$table->integer('account_status')->default(1);
 			$table->timestamp('deleted_at')->nullable();
+			$table->rememberToken();
 			$table->timestamps();
 		});
 	}
