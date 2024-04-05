@@ -14,6 +14,7 @@ class CreateOfficialsTable extends Migration
 	public function up()
 	{
 		Schema::create('officials', function (Blueprint $table) {
+			$table->id();
 			$table->foreignId('resident_id')->constrained()->cascadeOnDelete();
 			$table->string('username');
 			$table->string('password');
@@ -23,7 +24,6 @@ class CreateOfficialsTable extends Migration
 			$table->integer('account_status')->default(1);
 			$table->timestamp('deleted_at')->nullable();
 			$table->timestamps();
-			$table->primary(["resident_id"]);
 		});
 	}
 

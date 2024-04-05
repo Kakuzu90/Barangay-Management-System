@@ -31,6 +31,6 @@ class Transaction extends Model
 
 	public function official()
 	{
-		return $this->belongsTo(Official::class, "official_id", "resident_id")->withoutGlobalScope(Delete::class);
+		return $this->belongsTo(Official::class)->withoutGlobalScope(Delete::class);
 	}
 }

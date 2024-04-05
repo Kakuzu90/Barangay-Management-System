@@ -13,8 +13,6 @@ class Official extends Authenticatable
 {
 	use HasFactory, HasDeletedScope;
 
-	public $incrementing = false;
-
 	protected $fillable = [
 		"resident_id", "username", "password",
 		"position_id", "term_from", "term_to",
@@ -43,7 +41,7 @@ class Official extends Authenticatable
 
 	public function permissions()
 	{
-		return $this->belongsToMany(Permission::class, "positions_permissions");
+		return $this->belongsToMany(Permission::class, "officials_permissions");
 	}
 
 	public function hasPermission($permission)
