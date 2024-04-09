@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOfficialsPermissionsTable extends Migration
+class CreatePositionsPermissions extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -13,11 +13,11 @@ class CreateOfficialsPermissionsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('officials_permissions', function (Blueprint $table) {
-			$table->foreignId('official_id')->constrained()->cascadeOnDelete();
+		Schema::create('positions_permissions', function (Blueprint $table) {
+			$table->foreignId('position_id')->constrained()->cascadeOnDelete();
 			$table->foreignId('permission_id')->constrained()->cascadeOnDelete();
 
-			$table->primary(['official_id', 'permission_id']);
+			$table->primary(['position_id', 'permission_id']);
 		});
 	}
 
@@ -28,6 +28,6 @@ class CreateOfficialsPermissionsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::dropIfExists('officials_permissions');
+		Schema::dropIfExists('positions_permissions');
 	}
 }

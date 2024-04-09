@@ -23,6 +23,11 @@ class Position extends Model
 		return $this->hasMany(Official::class);
 	}
 
+	public function permissions()
+	{
+		return $this->belongsToMany(Permission::class, "positions_permissions");
+	}
+
 	public function scopeExceptAdmin($query)
 	{
 		return $query->where("id", 1); // 1 is for admin position

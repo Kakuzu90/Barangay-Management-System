@@ -21,7 +21,14 @@
 				<div class="row gy-3">
 					<div class="col-xl-12">
 						<label class="form-label text-default">Username</label>
-						<input type="text" name="username" class="form-control form-control-lg" placeholder="Enter your username" autofocus required />
+						<input type="text" 
+							name="username" class="form-control form-control-lg @error("failed") is-invalid @enderror" 
+							placeholder="Enter your username"
+							value="{{ old("username") }}"
+							autofocus required />
+						@error("failed")
+							<span class="invalid-feedback">{{ $message }}</span>
+						@enderror
 					</div>
 					<div class="col-xl-12">
 						<label class="form-label text-default">Password</label>
@@ -53,5 +60,16 @@
 			</form>
 			</div>
 		</div>
+
+		@if (Session::get("status"))
+		<div class="alert alert-success alert-dismissible fade show custom-alert-icon shadow-sm" role="alert">
+			<svg class="svg-success" xmlns="http://www.w3.org/2000/svg" height="1.5rem" viewBox="0 0 24 24" width="1.5rem" fill="#000000">
+				<path d="M0 0h24v24H0z" fill="none"/>
+				<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+			</svg>
+			<strong>Success:</strong> You have successfully logout!
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="ti ti-x"></i></button>
+		</div>
+		@endif
 	</div>
 @endsection

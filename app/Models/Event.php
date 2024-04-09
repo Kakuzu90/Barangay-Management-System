@@ -12,7 +12,7 @@ class Event extends Model
 
 	protected	$fillable = [
 		"title", "body", "for",
-		"date_event", "deleted_at"
+		"deleted_at"
 	];
 
 	protected $hidden = [
@@ -20,7 +20,6 @@ class Event extends Model
 	];
 
 	protected $casts = [
-		"date_event" => "date",
 		"deleted_at" => "date"
 	];
 }

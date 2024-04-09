@@ -9,6 +9,6 @@ class DashboardController extends Controller
 	public function index()
 	{
 		$data["test"] = 0;
-		return view("dashboard", compact("data"));
+		return view("pages.dashboard", compact("data"));
 	}
 }

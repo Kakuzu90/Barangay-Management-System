@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
 			ResidentSeeder::class,
 			OfficialSeeder::class,
 			UsersPermissionSeeder::class,
+			PositionsPermissions::class,
 		]);
 	}
 }

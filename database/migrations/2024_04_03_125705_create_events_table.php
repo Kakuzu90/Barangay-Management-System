@@ -18,7 +18,6 @@ class CreateEventsTable extends Migration
 			$table->string('title');
 			$table->text('body');
 			$table->text('for');
-			$table->date('date_event');
 			$table->timestamp('deleted_at')->nullable();
 			$table->timestamps();
 		});
