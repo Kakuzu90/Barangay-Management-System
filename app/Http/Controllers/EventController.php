@@ -4,61 +4,110 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class EventController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index(Request $request)
+	{
+		abort_if($request->user()->cannot("event-index"), 403);
+		$events = Event::latest()->get();
+		return view("pages.event", compact("events"));
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		abort_if($request->user()->cannot("event-store"), 403);
+		$request->validate([
+			"title" => "required",
+			"body" => "required",
+			"for" => "required"
+		]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Event $event)
-    {
-        //
-    }
+		Event::create([
+			"title" => $request->title,
+			"body" => $request->body,
+			"for" => $request->for,
+		]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Event $event)
-    {
-        //
-    }
+		$msg = ["Event Added", "New event has been successfully added."];
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Event  $event
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Event $event)
-    {
-        //
-    }
+		return redirect()->back()->with("success", $msg);
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  \App\Models\Event  $event
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show(Request $request, Event $event)
+	{
+		abort_if($request->user()->cannot("event-index"), 403);
+		return $event;
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\Models\Event  $event
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, Event $event)
+	{
+		abort_if($request->user()->cannot("event-update"), 403);
+		$request->validate([
+			"title" => "required",
+			"body" => "required",
+			"for" => "required"
+		]);
+
+		$event->update([
+			"title" => $request->title,
+			"body" => $request->body,
+			"for" => $request->for,
+		]);
+
+		if ($event->wasChanged()) {
+			$msg = ["Event Updated", "The event has been successfully updated."];
+			return redirect()->back()->with("update", $msg);
+		}
+		return redirect()->back();
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Models\Event  $event
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy(Request $request, Event $event)
+	{
+		abort_if($request->user()->cannot("event-delete"), 403);
+		$request->validate([
+			"password" => "required"
+		]);
+
+		if (!verifyMe($request->password)) {
+			return redirect()->back()->withErrors(["verify_password" => "The password is incorrect, please try again!"]);
+		}
+
+		$event->update(["deleted_at" => Carbon::now()]);
+
+		$msg = ["Event Deleted", "The event with the title of " . $event->title . " has been deleted."];
+
+		return redirect()->back()->with("delete", $msg);
+	}
 }
