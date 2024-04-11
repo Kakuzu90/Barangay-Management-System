@@ -43,7 +43,7 @@ class EventController extends Controller
 
 		$msg = ["Event Added", "New event has been successfully added."];
 
-		return redirect()->back()->with("success", $msg);
+		return goBackWith("success", $msg);
 	}
 
 	/**
@@ -82,9 +82,9 @@ class EventController extends Controller
 
 		if ($event->wasChanged()) {
 			$msg = ["Event Updated", "The event has been successfully updated."];
-			return redirect()->back()->with("update", $msg);
+			return goBackWith("update", $msg);
 		}
-		return redirect()->back();
+		return goBackWith();
 	}
 
 	/**
@@ -101,13 +101,13 @@ class EventController extends Controller
 		]);
 
 		if (!verifyMe($request->password)) {
-			return redirect()->back()->withErrors(["verify_password" => "The password is incorrect, please try again!"]);
+			return goBackWith()->withErrors(["verify_password" => "The password is incorrect, please try again!"]);
 		}
 
 		$event->update(["deleted_at" => Carbon::now()]);
 
 		$msg = ["Event Deleted", "The event with the title of " . $event->title . " has been deleted."];
 
-		return redirect()->back()->with("delete", $msg);
+		return goBackWith("delete", $msg);
 	}
 }

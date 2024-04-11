@@ -1,26 +1,43 @@
 <ul class="main-menu">
 
+	@can("dashboard-index")
 	<li class="slide__category">
 		<span class="category-name">Home</span>
 	</li>
 
-	<li class="slide">
-		<a href="{{ route("dashboard") }}" class="side-menu__item">
+	<li class="slide {{ isActive("dashboard") ? "active" : null }}">
+		<a href="{{ route("dashboard") }}" class="side-menu__item {{ isActive("dashboard") ? "active" : null }}">
 			<i class="ti ti-dashboard side-menu__icon"></i>
 			<span class="side-menu__label">Dashboard</span>
 		</a>
 	</li>
+	@endcan
+
+	@php
+		$announcement = false;
+	@endphp
 
 	<li class="slide__category">
 		<span class="category-name">Announcements</span>
 	</li>
 
+	@can("event-index")
 	<li class="slide">
 		<a href="#" class="side-menu__item">
 			<i class="ti ti-calendar-event side-menu__icon"></i>
 			<span class="side-menu__label">Events</span>
 		</a>
 	</li>
+	@endcan
+
+	@can("sms-index")
+	<li class="slide">
+		<a href="#" class="side-menu__item">
+			<i class="ti ti-message-2 side-menu__icon"></i>
+			<span class="side-menu__label">SMS</span>
+		</a>
+	</li>
+	@endcan
 
 	<li class="slide__category">
 		<span class="category-name">Informations</span>

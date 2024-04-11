@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 if (!function_exists("isActive")) {
@@ -14,5 +15,63 @@ if (!function_exists("verifyMe")) {
 	function verifyMe(string $password)
 	{
 		return password_verify($password, Auth::user()->password);
+	}
+}
+
+if (!function_exists("goBackWith")) {
+	function goBackWith(string $status = null, array $payload = null)
+	{
+		if ($status && count($payload) > 0) {
+			return redirect()->back()->with($status, $payload);
+		}
+		return redirect()->back();
+	}
+}
+
+if (!function_exists("ageCalculator")) {
+	function ageCalculator($date)
+	{
+		$today = Carbon::today()->year;
+		return $today - $date;
+	}
+}
+
+if (!function_exists("civilStatus")) {
+	function civilStatus()
+	{
+		return [
+			"Single",
+			"Married",
+			"Divorced",
+			"Widowed",
+			"Separated",
+			"Engaged",
+			"Domestic Partnership",
+			"Civil Union",
+			"Common-Law Marriage",
+			"Annulled",
+		];
+	}
+}
+
+if (!function_exists("sexs")) {
+	function sexs()
+	{
+		return [
+			'Male',
+			'Female'
+		];
+	}
+}
+
+if (!function_exists("blotterStatus")) {
+	function blotterStatus()
+	{
+		return [
+			"New",
+			"Ongoing",
+			"Settled",
+			"Unsettled"
+		];
 	}
 }

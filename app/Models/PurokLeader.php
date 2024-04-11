@@ -43,6 +43,18 @@ class PurokLeader extends Model
 			->whereDate("term_to", ">=", Carbon::today());
 	}
 
+	public function scopeHasConflictLeaders($query, $request)
+	{
+		return $query->where(function ($query) use ($request) {
+			$query->whereBetween('term_from', [$request["date_from"], $request["date_to"]])
+				->orWhereBetween('term_to', [$request["date_from"], $request["date_to"]])
+				->orWhere(function ($query) use ($request) {
+					$query->where('term_from', '<=', $request["date_from"])
+						->where('term_to', '>=', $request["date_to"]);
+				});
+		})->where("purok_id", $request["purok"])->exists();
+	}
+
 	public function text()
 	{
 		if (Carbon::now()->between($this->term_from, $this->term_to)) {

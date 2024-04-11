@@ -71,22 +71,26 @@
 							<li class="drop-heading d-block">
 								<div class="text-center">
 									<img src="{{ asset("assets/images/avatar/administrator.png") }}" alt="img" width="50" height="50" class="rounded-circle" />
-									<h5 class="text-dark mt-1 mb-0 fs-14 fw-semibold">{{ auth()->user()->resident->fullname }}</h5>
+									<h5 class="text-dark mt-2 mb-0 fs-14 fw-semibold">{{ auth()->user()->resident->fullname }}</h5>
 									<small class="text-danger">{{ auth()->user()->position->name }}</small>
 							 	</div>
 					 		</li>
+							@can("profile-settings")
 							<li class="dropdown-item">
 								<a class="d-flex w-100" href="#">
 									<i class="ti ti-user-circle fs-18 me-2 text-primary"></i>
 									Account Settings
 								</a>
 							</li>
+							@endcan
+							@can("system-settings")
 							<li class="dropdown-item">
 								<a class="d-flex w-100" href="#">
 									<i class="ti ti-settings fs-18 me-2 text-primary"></i>
 									System Settings
 								</a>
 							</li>
+							@endcan
 							<li class="dropdown-item">
 								<a class="d-flex w-100" href="{{ route("logout") }}">
 									<i class="ti ti-logout fs-18 me-2 text-primary"></i>

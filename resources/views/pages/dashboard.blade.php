@@ -20,4 +20,44 @@
 		</ol>
 	</div>
 </div>
+
+<div class="row">
+	<div class="col-md-6">
+		<div class="card">
+				<div class="card-body p-5">
+						<div class="row">
+								<div class="col-xl-6 my-auto">
+										<h2 class="fw-bold text-primary">Barangay Nangka Mission</h2>
+										<p class="mb-0">{{ $data["mission"] }}</p>
+								</div>
+								<div class="col-xl-6 mt-xl-0 mt-5">
+										<div class="text-center">
+												<img src="{{ asset("assets/images/landing/Team goals-pana.png") }}" 
+												alt="Mission Image" height="300" class="about-img" />
+										</div>
+								</div>
+						</div>
+				</div>
+		</div>
+	</div>
+
+	<div class="col-md-6">
+		<div class="card">
+				<div class="card-body p-5">
+						<div class="row">
+								<div class="col-xl-6 mt-xl-0 mt-5">
+										<div class="text-center">
+												<img src="{{ asset("assets/images/landing/Vision statement-pana.png") }}" 
+												alt="Mission Image" height="300" class="about-img" />
+										</div>
+								</div>
+								<div class="col-xl-6 my-auto">
+									<h2 class="fw-bold text-primary">Barangay Nangka Vision</h2>
+									<p class="mb-0">{{ $data["vision"] }}</p>
+								</div>
+						</div>
+				</div>
+		</div>
+	</div>
+</div>
 @endsection

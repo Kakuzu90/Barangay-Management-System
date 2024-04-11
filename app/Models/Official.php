@@ -85,4 +85,9 @@ class Official extends Authenticatable
 	{
 		return Carbon::now()->between($this->term_from, $this->term_to) && $this->account_status === 2;
 	}
+
+	public function isNotAdmin()
+	{
+		return $this->position_id !== 1; // 1 = Admin
+	}
 }

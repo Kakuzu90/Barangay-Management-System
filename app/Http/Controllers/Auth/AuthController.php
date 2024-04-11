@@ -21,7 +21,7 @@ class AuthController extends Controller
 		]);
 
 		if (Auth::attempt(["username" => $request->username, "password" => $request->password], $request->remember)) {
-			if (!Auth::user()->isOnTerm()) {
+			if (!Auth::user()->isOnTerm() && Auth::user()->isNotAdmin()) {
 				Auth::logout();
 				return redirect()->back()->withErrors(["failed" => "Your account is not active, please contact your administrator."]);
 			}
