@@ -11,6 +11,14 @@ if (!function_exists("isActive")) {
 	}
 }
 
+if (!function_exists("isLabel")) {
+	function isLabel(string $permission): bool
+	{
+		$permissions = Auth::user()->permissions()->pluck("slug")->toArray();
+		return in_array($permission, $permissions);
+	}
+}
+
 if (!function_exists("verifyMe")) {
 	function verifyMe(string $password)
 	{

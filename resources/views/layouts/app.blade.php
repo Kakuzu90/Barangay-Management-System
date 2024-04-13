@@ -12,9 +12,14 @@
 
 	<link rel="stylesheet" href="{{ asset("assets/libs/bootstrap/css/bootstrap.min.css") }}">
 	<link rel="stylesheet" href="{{ asset("assets/css/styles.min.css") }}">
-	<link rel="stylesheet" href="{{ asset("assets/css/icons.min.css") }}">
+	<link rel="stylesheet" href="{{ asset("assets/css/icons.css") }}">
 	<link rel="stylesheet" href="{{ asset("assets/libs/node-waves/waves.min.css") }}">
 	<link rel="stylesheet" href="{{ asset("assets/libs/simplebar/simplebar.min.css") }}">
+
+	<link rel="stylesheet" href="{{ asset("assets/libs/datatables.net-bs5/css/dataTables.bootstrap5.min.css") }}">
+	<link rel="stylesheet" href="{{ asset("assets/libs/datatables.net-bs5/css/responsive.bootstrap5.min.css") }}">
+	<link rel="stylesheet" href="{{ asset("assets/libs/datatables.net-bs5/css/buttons.bootstrap5.min.css") }}">
+	<link rel="stylesheet" href="{{ asset("assets/libs/toast/toastr.min.css") }}">
 
 	@yield("styles")
 
@@ -143,12 +148,12 @@
 			</div>
 		</footer>
 	</div>
-	
 	<div class="scrollToTop">
 		<span class="arrow"><i class="ti ti-arrow-up"></i></span>
 	</div>
 	<div id="responsive-overlay"></div>
 
+	<script src="{{ asset("assets/libs/jquery/jquery.min.js") }}"></script>
 	<script src="{{ asset("assets/libs/@popperjs/core/umd/popper.min.js") }}"></script>
 	<script src="{{ asset("assets/libs/bootstrap/js/bootstrap.bundle.min.js") }}"></script>
 	<script src="{{ asset("assets/js/defaultmenu.min.js") }}"></script>
@@ -158,6 +163,16 @@
 	<script src="{{ asset("assets/js/simplebar.js") }}"></script>
 	<script src="{{ asset("assets/js/custom.js") }}"></script>
 
+	<script src="{{ asset("assets/libs/toast/toastr.min.js") }}"></script>
+	<script src="{{ asset("assets/js/customtoastr.js") }}"></script>
+	@include("toast")
+
+	<script src="{{ asset("assets/libs/datatables.net-bs5/js/jquery.dataTables.min.js") }}"></script>
+	<script src="{{ asset("assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js") }}"></script>
+	<script src="{{ asset("assets/libs/datatables.net-bs5/js/dataTables.responsive.min.js") }}"></script>
+	<script src="{{ asset("assets/libs/datatables.net-bs5/js/dataTables.buttons.min.js") }}"></script>
+
 	@yield("scripts")
+	
 </body>
 </html>

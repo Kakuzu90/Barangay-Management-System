@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-	public function __invoke(Request $request)
+	public function index(Request $request)
 	{
 		abort_if($request->user()->cannot("transaction-index"), 403);
 		$data["transactions"] = Transaction::latest()->get();
