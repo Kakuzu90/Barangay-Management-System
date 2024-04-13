@@ -19,7 +19,7 @@
 							<i class="ti ti-eye align-middle"></i>
 						</button>
 						<div class="invalid-feedback text-start">
-							Password is required.
+							Password field is required.
 						</div>
 					</div>
 					<span class="mt-2">

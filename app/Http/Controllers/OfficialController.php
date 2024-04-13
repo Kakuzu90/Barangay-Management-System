@@ -21,7 +21,7 @@ class OfficialController extends Controller
 		abort_if($request->user()->cannot("barangay-official-index"), 403);
 		$data["officials"] = Official::latest()->get();
 		$data["positions"] = Position::exceptAdmin()->latest()->get();
-		return view("pages.official.index", compact("officials"));
+		return view("pages.official.index", compact("data"));
 	}
 
 	public function active(Request $request)

@@ -17,7 +17,7 @@ class PositionController extends Controller
 	public function index(Request $request)
 	{
 		abort_if($request->user()->cannot("position-index"), 403);
-		$positions = Position::latest()->get();
+		$positions = Position::exceptAdmin()->latest()->get();
 		return view("pages.position", compact("positions"));
 	}
 
@@ -31,11 +31,13 @@ class PositionController extends Controller
 	{
 		abort_if($request->user()->cannot("position-store"), 403);
 		$request->validate([
-			"name" => ["required", new UniqueEntry("positions", "name")]
+			"name" => ["required", new UniqueEntry("positions", "name")],
+			"order" => "required|numeric"
 		]);
 
 		Position::create([
-			"name" => $request->name
+			"name" => $request->name,
+			"priority" => $request->order
 		]);
 
 		$msg = ["Position Added", "New position has been successfully added."];
@@ -66,11 +68,13 @@ class PositionController extends Controller
 	{
 		abort_if($request->user()->cannot("position-update"), 403);
 		$request->validate([
-			"name" => ["required", new UniqueEntry("positions", "name", $position->id)]
+			"name" => ["required", new UniqueEntry("positions", "name", $position->id)],
+			"order" => "required|numeric"
 		]);
 
 		$position->update([
 			"name" => $request->name,
+			"priority" => $request->order
 		]);
 
 		if ($position->wasChanged()) {

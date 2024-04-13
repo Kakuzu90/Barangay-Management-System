@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Position;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -39,8 +40,9 @@ if (!function_exists("goBackWith")) {
 if (!function_exists("ageCalculator")) {
 	function ageCalculator($date)
 	{
+		$parse = Carbon::parse($date)->year;
 		$today = Carbon::today()->year;
-		return $today - $date;
+		return $today - $parse;
 	}
 }
 
@@ -81,5 +83,12 @@ if (!function_exists("blotterStatus")) {
 			"Settled",
 			"Unsettled"
 		];
+	}
+}
+
+if (!function_exists("getPriorityRange")) {
+	function getPriorityRange()
+	{
+		return Position::count();
 	}
 }

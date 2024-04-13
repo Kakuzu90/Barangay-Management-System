@@ -20,7 +20,8 @@ class PositionSeeder extends Seeder
 
 		foreach ($json as $item) {
 			Position::create([
-				"name" => $item->name
+				"name" => $item->name,
+				"priority" => $item->priority
 			]);
 		}
 	}

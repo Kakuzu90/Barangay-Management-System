@@ -40,10 +40,10 @@
 			</div>
 			<div class="card-body">
 				<div class="table-responsive">
-					<table class="table text-nowrap text-center" id="datatable">
+					<table class="table text-nowrap" id="datatable">
 						<thead>
 							<tr>
-								<th class="text-start">Purok Name</th>
+								<th>Purok Name</th>
 								<th>Residents</th>
 								<th>Tools</th>
 							</tr>
@@ -51,11 +51,11 @@
 						<tbody>
 							@foreach ($puroks as $item)
 								<tr>
-									<td class="text-start">
+									<td>
 										<span class="fw-bold text-primary">{{ $item->name }}</span>
 									</td>
 									<td>
-										<span class="badge bg-outline-dark">{{ $item->residents->count() }}</span>
+										<span class="badge bg-outline-dark fs-11">{{ $item->residents->count() }}</span>
 									</td>
 									<td class="align-middle">
 										@can("purok-update")

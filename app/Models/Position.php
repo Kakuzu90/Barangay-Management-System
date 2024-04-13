@@ -11,7 +11,7 @@ class Position extends Model
 	use HasFactory, HasDeletedScope;
 
 	protected $fillable = [
-		"name", "deleted_at"
+		"name", "priority", "deleted_at"
 	];
 
 	protected $hidden = [
@@ -30,7 +30,7 @@ class Position extends Model
 
 	public function scopeExceptAdmin($query)
 	{
-		return $query->where("id", 1); // 1 is for admin position
+		return $query->where("id", "!=", 1); // 1 is for admin position
 	}
 
 	public function setNameAttribute($value)
@@ -41,5 +41,10 @@ class Position extends Model
 	public function getNameAttribute($value)
 	{
 		return $this->attributes["name"] = ucwords($value);
+	}
+
+	public function isAdmin()
+	{
+		return $this->id === 1;
 	}
 }

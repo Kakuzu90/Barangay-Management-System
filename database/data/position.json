@@ -1,20 +1,26 @@
 [
 	{
-		"name": "Admin"
+		"name": "Admin",
+		"priority": null
 	},
 	{
-		"name": "Captain"
+		"name": "Captain",
+		"priority": 1
 	},
 	{
-		"name": "Kagawad"
+		"name": "Kagawad",
+		"priority": 2
 	},
 	{
-		"name": "SK Chairman"
+		"name": "SK Chairman",
+		"priority": 3
 	},
 	{
-		"name": "SK Kagawad"
+		"name": "SK Kagawad",
+		"priority": 4
 	},
 	{
-		"name": "Secretary"
+		"name": "Secretary",
+		"priority": 5
 	}
 ]

@@ -41,6 +41,7 @@ Route::middleware("auth")->group(function () {
 	Route::get("sms", [SMSController::class, "index"])->name("sms.index");
 	Route::apiResource("puroks", PurokController::class);
 	Route::apiResource("positions", PositionController::class);
+	Route::get("residents/{resident}/ajax", [ResidentController::class, "ajax"])->name("residents.ajax");
 	Route::resource("residents", ResidentController::class);
 	Route::get("purok-leaders/active", [PurokLeaderController::class, "active"])->name("purok-leaders.active");
 	Route::apiResource("purok-leaders", PurokLeaderController::class);

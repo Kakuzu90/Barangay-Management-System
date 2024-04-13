@@ -161,7 +161,6 @@
 	<script src="{{ asset("assets/libs/node-waves/waves.min.js") }}"></script>
 	<script src="{{ asset("assets/js/sticky.js") }}"></script>
 	<script src="{{ asset("assets/js/simplebar.js") }}"></script>
-	<script src="{{ asset("assets/js/custom.js") }}"></script>
 
 	<script src="{{ asset("assets/libs/toast/toastr.min.js") }}"></script>
 	<script src="{{ asset("assets/js/customtoastr.js") }}"></script>
@@ -174,5 +173,6 @@
 
 	@yield("scripts")
 	
+	<script src="{{ asset("assets/js/custom.js") }}"></script>
 </body>
 </html>

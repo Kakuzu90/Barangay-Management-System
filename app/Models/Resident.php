@@ -35,7 +35,7 @@ class Resident extends Model
 
 	public function scopeExceptAdmin($query)
 	{
-		return $query->where("id", 1); // 1 is for admin
+		return $query->where("id", "!=", 1); // 1 is for admin
 	}
 
 	public function setFirstNameAttribute($value)
@@ -101,5 +101,18 @@ class Resident extends Model
 	public function getEducationLevelAttribute($value)
 	{
 		return $this->attributes["education_level"] = ucwords($value);
+	}
+
+	public function isAdmin()
+	{
+		return $this->id === 1;
+	}
+
+	public function avatar()
+	{
+		if (strtolower($this->gender) === "male") {
+			return asset("assets/images/avatar/male.png");
+		}
+		return asset("assets/images/avatar/female.png");
 	}
 }

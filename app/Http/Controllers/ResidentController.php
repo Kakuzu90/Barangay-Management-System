@@ -18,8 +18,8 @@ class ResidentController extends Controller
 	public function index(Request $request)
 	{
 		abort_if($request->user()->cannot("resident-index"), 403);
-		$residents = Resident::latest()->get();
-		return view("pages.resident.index", compact("residents"));
+		$data["residents"] = Resident::exceptAdmin()->latest()->get();
+		return view("pages.resident.index", compact("data"));
 	}
 
 	/**
@@ -97,6 +97,12 @@ class ResidentController extends Controller
 		return view("pages.resident.show", compact("resident"));
 	}
 
+	public function ajax(Request $request, Resident $resident)
+	{
+		abort_if($request->user()->cannot("resident-show"), 403);
+		return $resident;
+	}
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -107,7 +113,7 @@ class ResidentController extends Controller
 	{
 		abort_if($request->user()->cannot("resident-update"), 403);
 		$puroks = Purok::latest()->get();
-		return view("pages.resident.create", compact("puroks", "resident"));
+		return view("pages.resident.edit", compact("puroks", "resident"));
 	}
 
 	/**
