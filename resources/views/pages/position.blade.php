@@ -60,7 +60,7 @@
 										<span class="fw-bold text-primary">{{ $item->name }}</span>
 									</td>
 									<td>
-										<span class="badge bg-primary fs-11">
+										<span class="badge bg-primary fs-12">
 											<i class="bi bi-view-stacked"></i>
 											{{ $item->priority }}
 										</span>

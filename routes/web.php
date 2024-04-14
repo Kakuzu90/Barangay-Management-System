@@ -45,7 +45,7 @@ Route::middleware("auth")->group(function () {
 	Route::resource("residents", ResidentController::class);
 	Route::get("purok-leaders/active", [PurokLeaderController::class, "active"])->name("purok-leaders.active");
 	Route::apiResource("purok-leaders", PurokLeaderController::class);
-	Route::resource("blotters", BlotterController::class);
+	Route::resource("blotters", BlotterController::class)->except("show");
 	Route::get("officials/active", [OfficialController::class, "active"])->name("officials.active");
 	Route::apiResource("officials", OfficialController::class);
 	Route::controller(CertificateController::class)->prefix("certificate")->as("certificate.")->group(function () {

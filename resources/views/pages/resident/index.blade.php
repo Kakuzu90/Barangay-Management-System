@@ -79,7 +79,7 @@
 										<span>{{ $item->education_level }}</span>
 									</td>
 									<td>
-										<span class="badge bg-primary">{{ $item->purok->name }}</span>
+										<span class="badge bg-primary fs-12">{{ $item->purok->name }}</span>
 									</td>
 									<td class="align-middle">
 										@can("resident-update")
@@ -92,7 +92,7 @@
 										@endcan
 										@can("resident-delete")
 											<button type="button"
-												data-route="{{ route("residents.ajax", $item->id) }}"
+												data-route="{{ route("residents.destroy", $item->id) }}"
 												data-title="{{ $item->fullname }}"
 												class="delete btn btn-icon btn-sm btn-danger btn-wave waves-light"
 												data-bs-toggle="tooltip" data-bs-placement="top" title="Delete {{ $item->fullname }}"
@@ -122,7 +122,7 @@
 	<script>
 		$(document).ready(function() {
 			$("#datatable").DataTable({
-				order: [[1, "asc"], [2, "asc"]],
+				order: [[4, "asc"], [0, "asc"]],
 				lengthMenu: false,
 				language: {
             searchPlaceholder: 'Search...',

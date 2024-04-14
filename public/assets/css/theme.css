@@ -73,7 +73,7 @@
 
 .toast-title { font-weight: bold; }
 
-.toast-message { word-wrap: break-word; margin-right: 1rem; }
+.toast-message { word-wrap: break-word; margin-right: 1.5rem; }
 
 .toast-message a, .toast-message label { color: #526484; }
 

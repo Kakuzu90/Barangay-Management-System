@@ -50,21 +50,36 @@
 					<label class="form-label fs-14 text-dark">
 						First Name <span class="fw-bold text-danger">*</span>
 					</label>
-					<input value="{{ old("first_name") }}" type="text" name="first_name" class="form-control" placeholder="Enter first name" required />
+					<input value="{{ old("first_name") }}" type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror" placeholder="Enter first name" required />
+					@error("first_name")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
 					<label class="form-label fs-14 text-dark">
 						Middle Name <span class="fw-bold text-danger">*</span>
 					</label>
-					<input value="{{ old("middle_name") }}" type="text" name="middle_name" class="form-control" placeholder="Enter middle name" required />
+					<input value="{{ old("middle_name") }}" type="text" name="middle_name" class="form-control @error('middle_name') is-invalid @enderror" placeholder="Enter middle name" required />
+					@error("middle_name")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
 					<label class="form-label fs-14 text-dark">
 						Last Name <span class="fw-bold text-danger">*</span>
 					</label>
-					<input value="{{ old("last_name") }}" type="text" name="last_name" class="form-control" placeholder="Enter last name" required />
+					<input value="{{ old("last_name") }}" type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" placeholder="Enter last name" required />
+					@error("last_name")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
@@ -85,75 +100,120 @@
 					<label class="form-label fs-14 text-dark">
 						Phone Number <span class="fw-bold text-danger">*</span>
 					</label>
-					<input type="text" name="phone_number" class="form-control phone-number" placeholder="(+63)" minlength="13" maxlength="13"  required />
+					<input type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror phone-number" placeholder="(+63)" minlength="13" maxlength="13"  required />
+					@error("phone_number")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
 					<label class="form-label fs-14 text-dark">
 						Gender <span class="fw-bold text-danger">*</span>
 					</label>
-					<select name="gender" class="select2-icon form-control" data-select-placeholder="Select a gender" required>
+					<select name="gender" class="select2-icon form-control @error("gender") is-invalid @enderror" data-select-placeholder="Select a gender" required>
 						@foreach (sexs() as $item)
 								<option value="{{ $item }}" data-icon="ti ti-gender-intergender">{{ $item }}</option>
 						@endforeach
 					</select>
+					@error("gender")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
 					<label class="form-label fs-14 text-dark">
 						Citizenship <span class="fw-bold text-danger">*</span>
 					</label>
-					<input value="{{ old("citizenship") }}" type="text" name="citizenship" class="form-control" placeholder="Enter citizenship" required />
+					<input value="{{ old("citizenship") }}" type="text" name="citizenship" class="form-control @error('citizenship') is-invalid @enderror" placeholder="Enter citizenship" required />
+					@error("citizenship")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
 					<label class="form-label fs-14 text-dark">
 						Civil Status <span class="fw-bold text-danger">*</span>
 					</label>
-					<select name="civil_status" class="select2-icon form-control" data-select-placeholder="Select a status" required>
+					<select name="civil_status" class="select2-icon form-control @error("civil_status") is-invalid @enderror" data-select-placeholder="Select a status" required>
 						@foreach (civilStatus() as $item)
 								<option value="{{ $item }}" data-icon="ti ti-hierarchy">{{ $item }}</option>
 						@endforeach
 					</select>
+					@error("civil_status")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
 					<label class="form-label fs-14 text-dark">
 						Education Level <span class="fw-bold text-danger">*</span>
 					</label>
-					<input value="{{ old("education") }}" type="text" name="education" class="form-control" placeholder="Enter education level" required />
+					<input value="{{ old("education") }}" type="text" name="education" class="form-control @error('education') is-invalid @enderror" placeholder="Enter education level" required />
+					@error("education")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 has-validation">
 					<label class="form-label fs-14 text-dark">
 						Date Of Birth <span class="fw-bold text-danger">*</span>
 					</label>
-					<input value="{{ old("date_birth") }}" type="text" name="date_birth" class="form-control flatpickr-human-friendly" placeholder="Choose a date" required />
+					<input value="{{ old("date_birth") }}" type="text" name="date_birth" class="form-control flatpickr-human-friendly @error('date_birth') is-invalid @enderror" placeholder="Choose a date" required />
+					@error("date_birth")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
 					<label class="form-label fs-14 text-dark">
 						Purok <span class="fw-bold text-danger">*</span>
 					</label>
-					<select name="purok" class="select2-icon form-control" data-select-placeholder="Select a purok" required>
+					<select name="purok" class="select2-icon form-control @error("purok") is-invalid @enderror" data-select-placeholder="Select a purok" required>
 						@foreach ($puroks as $item)
 								<option value="{{ $item->id }}" data-icon="ti ti-map-pin">{{ $item->name }}</option>
 						@endforeach
 					</select>
+					@error("purok")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-md-6">
 					<label class="form-label fs-14 text-dark">
 						Place of Birth <span class="fw-bold text-danger">*</span>
 					</label>
-					<textarea name="place_birth" class="form-control" placeholder="Enter place of birth" required>{{ old("place_birth") }}</textarea>
+					<textarea name="place_birth" class="form-control @error('place_birth') is-invalid @enderror" placeholder="Enter place of birth" required>{{ old("place_birth") }}</textarea>
+					@error("place_birth")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-md-6">
 					<label class="form-label fs-14 text-dark">
 						Current Address <span class="fw-bold text-danger">*</span>
 					</label>
-					<textarea name="address" class="form-control" placeholder="Enter current address" required>{{ old("address") }}</textarea>
+					<textarea name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Enter current address" required>{{ old("address") }}</textarea>
+					@error("address")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
 				</div>
 
 				<div class="col-12">
@@ -217,5 +277,9 @@
 			const value = '{{ old("phone_number") }}'
 			cleave.setRawValue(value)
 		})
+		
+		$("select[name=gender]").val('{{ old("gender") }}').trigger("change");
+		$("select[name=civil_status]").val('{{ old("civil_status") }}').trigger("change");
+		$("select[name=purok]").val('{{ old("purok") }}').trigger("change");
 	</script>
 @endsection

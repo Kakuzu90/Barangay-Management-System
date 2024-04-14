@@ -45,5 +45,14 @@
 				rtl: false,
 			})
 		@enderror
+		@error("conflict")
+		Toast.notify("<h5>Conflict Data</h5><p>{{ $message }}</p>", "error", {
+				positionClass: "toast-top-center",
+				closeButton: true,
+				tapToDismiss: false,
+				progressBar: true,
+				rtl: false,
+			})
+		@enderror
 	});
 </script>

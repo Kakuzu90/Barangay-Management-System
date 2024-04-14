@@ -52,7 +52,7 @@ class PurokLeader extends Model
 					$query->where('term_from', '<=', $request["date_from"])
 						->where('term_to', '>=', $request["date_to"]);
 				});
-		})->where("purok_id", $request["purok"])->exists();
+		})->where("purok_id", $request["purok"]);
 	}
 
 	public function text()

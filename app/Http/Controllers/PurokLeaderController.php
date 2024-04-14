@@ -25,8 +25,8 @@ class PurokLeaderController extends Controller
 	public function active(Request $request)
 	{
 		abort_if($request->user()->cannot("purok-leader-index"), 403);
-		$data["leaders"] = PurokLeader::active()->latest()->get();
-		return view("pages.purok-leader.index", compact("data"));
+		$data["leaders"] = PurokLeader::active()->orderBy("purok_id", "asc")->get();
+		return view("pages.purok-leader.active", compact("data"));
 	}
 
 	/**
@@ -45,7 +45,7 @@ class PurokLeaderController extends Controller
 			"date_to" => "required|date|date_format:Y-m-d",
 		]);
 
-		if (PurokLeader::hasConflictLeader($request->only("date_from", "date_to", "purok"))) {
+		if (PurokLeader::hasConflictLeaders($request->only("date_from", "date_to", "purok"))->exists()) {
 			return goBackWith()->withErrors(["conflict" => "Each purok can have only one designated leader!"]);
 		}
 
@@ -70,7 +70,15 @@ class PurokLeaderController extends Controller
 	public function show(Request $request, PurokLeader $purokLeader)
 	{
 		abort_if($request->user()->cannot("purok-leader-index"), 403);
-		return $purokLeader;
+		return [
+			"id" => $purokLeader->id,
+			"resident" => $purokLeader->resident_id,
+			"fullname" => $purokLeader->resident->fullname,
+			"avatar" => $purokLeader->resident->avatar(),
+			"purok" => $purokLeader->purok_id,
+			"date_from" => $purokLeader->term_from,
+			"date_to" => $purokLeader->term_to,
+		];
 	}
 
 	/**
@@ -90,7 +98,7 @@ class PurokLeaderController extends Controller
 			"date_to" => "required|date|date_format:Y-m-d",
 		]);
 
-		$conflict = PurokLeader::hasConflictLeader($request->only("date_from", "date_to", "purok"))->first();
+		$conflict = PurokLeader::hasConflictLeaders($request->only("date_from", "date_to", "purok"))->first();
 		if ($conflict && $conflict->id !== $purokLeader->id) {
 			return goBackWith()->withErrors(["conflict" => "Each purok can have only one designated leader!"]);
 		}

@@ -82,7 +82,7 @@
 					<a href="javascript:void(0)">Purok Leaders</a>
 			</li>
 			<li class="slide {{ isActive("puroks-leaders.active") ? "active" : null }}">
-				<a href="{{ route("purok-leaders.active") }}" class="side-menu__item {{ isActive("puroks-leaders.active") ? "active" : null }}">Active Purok Leaders</a>
+				<a href="{{ route("purok-leaders.active") }}" class="side-menu__item {{ isActive("purok-leaders.active") ? "active" : null }}">Active Purok Leaders</a>
 			</li>
 			<li class="slide {{ isActive("purok-leaders.index") ? "active" : null }}">
 				<a href="{{ route("purok-leaders.index") }}" class="side-menu__item {{ isActive("purok-leaders.index") ? "active" : null }}">Manage Purok Leaders</a>
