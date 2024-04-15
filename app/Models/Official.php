@@ -20,7 +20,7 @@ class Official extends Authenticatable
 	];
 
 	protected $hidden = [
-		"created_at", "updated_at", "deleted_at", "remember_token"
+		"created_at", "updated_at", "deleted_at", "remember_token", "password"
 	];
 
 	protected $casts = [
@@ -67,7 +67,7 @@ class Official extends Authenticatable
 
 	public function text()
 	{
-		if (Carbon::now()->between($this->term_from, $this->term_to)) {
+		if (Carbon::now()->between($this->term_from, $this->term_to) && $this->account_status === 2) {
 			return "Active";
 		}
 		return "Inactive";
@@ -75,7 +75,7 @@ class Official extends Authenticatable
 
 	public function color()
 	{
-		if (Carbon::now()->between($this->term_from, $this->term_to)) {
+		if (Carbon::now()->between($this->term_from, $this->term_to) && $this->account_status === 2) {
 			return "success";
 		}
 		return "warning";

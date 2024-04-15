@@ -65,6 +65,7 @@ Route::middleware("auth")->group(function () {
 		Route::put("general-info", "general")->name("general");
 		Route::patch("account-info", "account")->name("account");
 		Route::patch("password-info", "password")->name("password");
+		Route::patch("avatar-info", "avatar")->name("avatar");
 	});
 });
 

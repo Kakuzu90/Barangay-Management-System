@@ -82,6 +82,14 @@
 										<span class="badge bg-primary fs-12">{{ $item->purok->name }}</span>
 									</td>
 									<td class="align-middle">
+										@can("resident-index")
+											<a href="{{ route("residents.show", $item->id) }}"
+												class="btn btn-icon btn-sm btn-primary btn-wave waves-light"
+												data-bs-toggle="tooltip" data-bs-placement="top" title="View {{ $item->fullname }}"
+												>
+												<i class="ti ti-eye fs-16"></i>
+											</a>
+										@endcan
 										@can("resident-update")
 											<a href="{{ route("residents.edit", $item->id) }}"
 												class="btn btn-icon btn-sm btn-success btn-wave waves-light"

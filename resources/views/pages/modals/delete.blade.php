@@ -8,9 +8,11 @@
 		@csrf
 		@method("DELETE")
 			<div class="modal-body text-center">
-				<i class="bi bi-question-octagon-fill display-1 text-danger"></i>
+				<a href="https://storyset.com/people">
+					<img src="{{ asset("assets/images/landing/Questions-bro.png") }}" height="250" alt="Question Image" />
+				</a>
 				<h3>Warning!</h3>
-				<p class="text-muted">Are you sure you want to delete <span class="text-danger fw-bold" id="to-delete"></span> data?</p>
+				<p class="text-dark">Are you sure you want to delete <span class="text-danger fw-bold" id="to-delete"></span> data?</p>
 
 				<div>
 					<div class="input-group has-validation">

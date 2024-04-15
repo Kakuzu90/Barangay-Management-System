@@ -21,7 +21,7 @@ class SettingSeeder extends Seeder
 		foreach ($json as $item) {
 			Setting::create([
 				"title" => $item->title,
-				"content" => $item->content,
+				"content" => "<p>$item->content</p>",
 			]);
 		}
 	}

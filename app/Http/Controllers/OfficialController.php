@@ -19,7 +19,7 @@ class OfficialController extends Controller
 	public function index(Request $request)
 	{
 		abort_if($request->user()->cannot("barangay-official-index"), 403);
-		$data["officials"] = Official::latest()->get();
+		$data["officials"] = Official::exceptAdmin()->latest()->get();
 		$data["positions"] = Position::exceptAdmin()->latest()->get();
 		return view("pages.official.index", compact("data"));
 	}
@@ -27,7 +27,13 @@ class OfficialController extends Controller
 	public function active(Request $request)
 	{
 		abort_if($request->user()->cannot("barangay-official-index"), 403);
-		$officials = Official::active()->latest()->get();
+		$officials = Official::exceptAdmin()
+			->active()
+			->with("position")
+			->get()->sortBy(function ($official) {
+				return $official->position->priority;
+			});
+		$officials = $officials->values()->all();
 		return view("pages.official.active", compact("officials"));
 	}
 
@@ -77,7 +83,17 @@ class OfficialController extends Controller
 	public function show(Request $request, Official $official)
 	{
 		abort_if($request->user()->cannot("barangay-official-index"), 403);
-		return $official;
+		return [
+			"id" => $official->id,
+			"resident" => $official->resident_id,
+			"fullname" => $official->resident->fullname,
+			"avatar" => $official->resident->avatar(),
+			"position" => $official->position_id,
+			"username" => $official->username,
+			"date_from" => $official->term_from,
+			"date_to" => $official->term_to,
+			"account" => $official->account_status,
+		];
 	}
 
 	/**
@@ -93,11 +109,11 @@ class OfficialController extends Controller
 		$request->validate([
 			"resident" => "required|numeric",
 			"username" => ["required", new UniqueEntry("officials", "username", $official->id)],
-			"password" => "confirmed",
+			"password" => "nullable|confirmed",
 			"position" => "required|numeric",
 			"date_from" => "required|date|date_format:Y-m-d",
 			"date_to" => "required|date|date_format:Y-m-d",
-			"status" => "required|numeric"
+			"status" => "numeric"
 		]);
 
 		$array = [
@@ -106,7 +122,7 @@ class OfficialController extends Controller
 			"position_id" => $request->position,
 			"term_from" => $request->date_from,
 			"term_to" => $request->date_to,
-			"account_status" => $request->status,
+			"account_status" => $request->filled("status") ? $request->status : 1,
 		];
 
 		if ($request->filled("password")) {

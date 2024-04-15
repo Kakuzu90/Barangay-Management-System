@@ -11,6 +11,7 @@
 @section("styles")
 	<link rel="stylesheet" href="{{ asset("assets/libs/select2/select2.min.css") }}">
 	<link rel="stylesheet" href="{{ asset("assets/libs/flatpickr/flatpickr.min.css") }}">
+	<link rel="stylesheet" href="{{ asset("assets/libs/croppie/croppie.css") }}">
 @endsection
 
 @section("body")
@@ -31,13 +32,43 @@
 </div>
 
 <div class="row">
-	<div class="col-xl-10 mx-auto">
+	<div class="col-xl-3">
+		<div class="card custom-card">
+			<div class="card-body">
+				<div id="uploaded-container" class="d-flex justify-content-center align-items-center flex-column">
+					<div class="avatar avatar-rounded avatar-xxl mb-2" style="width: 10rem; height: 10rem;">
+						<img src="{{ $resident->avatar() }}" id="profile" alt="Avatar" />
+					</div>
+					<label
+						for="profile-photo"
+						class="btn btn-sm btn-outline-success btn-wave waves-light"
+					>
+						<i class="ti ti-photo fs-14"></i> Select Profile
+					</label>
+				</div>
+				<div class="d-none" id="upload-container">
+					<div id="upload-prompt"></div>
+					<div class="mt-2 text-center">
+						<button type="button" class="btn-crop btn btn-sm btn-success btn-wave waves-light">
+							<i class="bi bi-crop"></i> Crop
+						</button>
+						<button type="button" class="btn-cancel btn btn-sm btn-outline-danger btn-wave waves-light">
+							<i class="bi bi-x"></i> Cancel
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-9 mx-auto">
 		<div class="card custom-card">
 			<form action="{{ route("residents.update", $resident->id) }}" method="POST">
 				@csrf
 				@method("PUT")
+				<input type="file" id="profile-photo" hidden accept="image/*" />
+      	<input type="text" name="profile" hidden />
 			<div class="card-header justify-content-end">
-				<button type="submit" class="btn btn-success" style="width: 200px;">
+				<button type="submit" class="btn btn-success btn-wave waves-light" style="width: 200px;">
 					Save Changes
 				</button>
 			</div>
@@ -262,6 +293,7 @@
 @endsection
 
 @section("scripts")
+	<script src="{{ asset("assets/libs/croppie/croppie.js") }}"></script>
 	<script src="{{ asset("assets/libs/cleave.js/cleave.min.js") }}"></script>
 	<script src="{{ asset("assets/libs/cleave.js/addons/cleave-phone.ph.js") }}"></script>
 	<script src="{{ asset("assets/libs/flatpickr/flatpickr.min.js") }}"></script>
@@ -282,5 +314,56 @@
 		$("select[name=gender]").val('{{ $resident->gender }}').trigger("change");
 		$("select[name=civil_status]").val('{{ $resident->civil_status }}').trigger("change");
 		$("select[name=purok]").val('{{ $resident->purok_id }}').trigger("change");
+
+		$image = $("#upload-prompt").croppie({
+			enableExif: true,
+			viewport: {
+					width: 200,
+					height: 200,
+					type: "square"
+			},
+			boundary: {
+					width: 220,
+					height: 220
+			}
+		});
+
+		$(document).on('change', '#profile-photo', function() {
+			let reader = new FileReader();
+			reader.onload = function (e) {
+				$image.croppie('bind', {
+					url: e.target.result
+				})			
+			}
+			reader.readAsDataURL(this.files[0]);
+
+			$("#uploaded-container").addClass("d-none");
+			$("#uploaded-container").removeClass("d-block");
+			$("#upload-container").addClass("d-block");
+			$("#upload-container").removeClass("d-none");
+		});
+
+		$(document).on("click", ".btn-cancel", function() {
+			$("#profile-photo").val(null);
+			$("#uploaded-container").addClass("d-block");
+			$("#uploaded-container").removeClass("d-none");
+			$("#upload-container").addClass("d-none");
+			$("#upload-container").removeClass("d-block");
+		});
+
+		$(document).on('click', '.btn-crop', function() {
+			$image.croppie('result', {
+				type : 'canvas',
+				size : 'viewport',
+			}).then(function(response) {
+				$("#profile-photo").val(null);
+				$("#uploaded-container").addClass("d-block");
+				$("#uploaded-container").removeClass("d-none");
+				$("#upload-container").addClass("d-none");
+				$("#upload-container").removeClass("d-block");
+				$('#profile').attr('src', response)
+				$('input[name=profile]').val(response)
+			});
+		});
 	</script>
 @endsection

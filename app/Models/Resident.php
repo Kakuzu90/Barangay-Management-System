@@ -103,6 +103,16 @@ class Resident extends Model
 		return $this->attributes["education_level"] = ucwords($value);
 	}
 
+	public function isMale()
+	{
+		return strtolower($this->gender) === "male";
+	}
+
+	public function isFemale()
+	{
+		return strtolower($this->gender) === "female";
+	}
+
 	public function isAdmin()
 	{
 		return $this->id === 1;
@@ -110,9 +120,6 @@ class Resident extends Model
 
 	public function avatar()
 	{
-		if (strtolower($this->gender) === "male") {
-			return asset("assets/images/avatar/male.png");
-		}
-		return asset("assets/images/avatar/female.png");
+		return route("api.avatar", $this->id);
 	}
 }

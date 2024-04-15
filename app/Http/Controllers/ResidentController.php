@@ -58,7 +58,7 @@ class ResidentController extends Controller
 			"address" => "required"
 		]);
 
-		Resident::create([
+		$resident = Resident::create([
 			"first_name" => $request->first_name,
 			"middle_name" => $request->middle_name,
 			"last_name" => $request->last_name,
@@ -79,6 +79,20 @@ class ResidentController extends Controller
 			"contact_address" => $request->contact_address,
 			"address" => $request->address,
 		]);
+
+		if ($request->filled("profile")) {
+			$image = $request->profile;
+			list(, $image) = explode(';', $image);
+			list(, $image) = explode(',', $image);
+			$image = base64_decode($image);
+
+			$filename = $resident->id . ".png";
+			$path = storage_path('app/public/profile/' . $filename);
+			if (file_exists($path)) {
+				unlink($path);
+			}
+			file_put_contents($path, $image);
+		}
 
 		$msg = ["Resident Added", "New resident has been successfully added."];
 
@@ -175,6 +189,20 @@ class ResidentController extends Controller
 		}
 
 		$resident->update($array);
+
+		if ($request->filled("profile")) {
+			$image = $request->profile;
+			list(, $image) = explode(';', $image);
+			list(, $image) = explode(',', $image);
+			$image = base64_decode($image);
+
+			$filename = $resident->id . ".png";
+			$path = storage_path('app/public/profile/' . $filename);
+			if (file_exists($path)) {
+				unlink($path);
+			}
+			file_put_contents($path, $image);
+		}
 
 		if ($resident->wasChanged()) {
 			$msg = ["Resident Updated", "The resident has been successfully updated."];

@@ -36,10 +36,24 @@
 				</div>
 				<div class="d-flex text-center justify-content-between mt-1 mb-1">
 					<div class="flex-fill">
-						<p class="mb-0 fw-semibold fs-16 text-truncate max-w-150 mx-auto">
+						<p class="mb-1 fw-semibold fs-16 max-w-150 mx-auto">
 							<a href="{{ route("residents.show", $item->resident_id) }}">{{ $item->resident->fullname }}</a>
 						</p>
-						<p class="mb-0 fs-12 text-muted text-truncate max-w-150 mx-auto">{{ $item->resident->phone_number }}</p>
+						<p class="mb-1 fs-12 text-muted max-w-150 mx-auto">
+							<span class="text-dark">
+								<b>Gender:</b> 
+								<span>
+									{{ $item->resident->gender }}
+								</span>
+							</span>
+							<span class="text-dark ms-2">
+								<b>Age:</b> 
+								<span>
+									{{ $item->resident->age }}
+								</span>
+							</span>
+						</p>
+						<p class="mb-0 fs-13 text-dark max-w-150 mx-auto">{{ $item->resident->phone_number }}</p>
 					</div>
 				</div>
 				<div class="text-center">

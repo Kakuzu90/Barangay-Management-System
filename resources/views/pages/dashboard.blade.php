@@ -28,7 +28,7 @@
 						<div class="row">
 								<div class="col-xl-6 my-auto">
 										<h2 class="fw-bold text-primary">Barangay Nangka Mission</h2>
-										<p class="mb-0">{{ $data["mission"] }}</p>
+										<p class="mb-0">{!! $data["mission"] !!}</p>
 								</div>
 								<div class="col-xl-6 mt-xl-0 mt-5">
 										<div class="text-center">
@@ -53,7 +53,7 @@
 								</div>
 								<div class="col-xl-6 my-auto">
 									<h2 class="fw-bold text-primary">Barangay Nangka Vision</h2>
-									<p class="mb-0">{{ $data["vision"] }}</p>
+									<p class="mb-0">{!! $data["vision"] !!}</p>
 								</div>
 						</div>
 				</div>

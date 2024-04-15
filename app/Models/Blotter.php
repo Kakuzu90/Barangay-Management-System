@@ -12,7 +12,7 @@ class Blotter extends Model
 	use HasFactory, HasDeletedScope;
 
 	protected $fillable = [
-		"complaint_id", "respondent_id", "involves",
+		"complainant_id", "respondent_id", "involves",
 		"date_hearing", "incident_location", "incident_date",
 		"status", "results", "deleted_at"
 	];
@@ -29,12 +29,12 @@ class Blotter extends Model
 
 	public function complaint()
 	{
-		return $this->belongsTo(Resident::class)->withoutGlobalScope(Delete::class);
+		return $this->belongsTo(Resident::class, "complainant_id", "id")->withoutGlobalScope(Delete::class);
 	}
 
 	public function respondent()
 	{
-		return $this->belongsTo(Resident::class)->withoutGlobalScope(Delete::class);
+		return $this->belongsTo(Resident::class, "respondent_id", "id")->withoutGlobalScope(Delete::class);
 	}
 
 	public function setStatusAttribute($value)
@@ -49,17 +49,22 @@ class Blotter extends Model
 
 	public function color()
 	{
-		if ($this->status === "new") {
+		if (strtolower($this->status) === "new") {
 			return "primary";
 		}
-		if ($this->status === "ongoing") {
+		if (strtolower($this->status) === "ongoing") {
 			return "warning";
 		}
-		if ($this->status === "settled") {
+		if (strtolower($this->status) === "settled") {
 			return "success";
 		}
-		if ($this->status === "unsettled") {
+		if (strtolower($this->status) === "unsettled") {
 			return "danger";
 		}
+	}
+
+	public function involvesArray()
+	{
+		return ($this->involves) ? explode(",", $this->involves) : 0;
 	}
 }

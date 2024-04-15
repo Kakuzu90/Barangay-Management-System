@@ -51,7 +51,90 @@
 								<th>Tools</th>
 							</tr>
 						</thead>
-						<tbody></tbody>
+						<tbody>
+							@foreach ($data["blotters"] as $item)
+								<tr>
+									<td>
+										<div class="d-flex justify-content-start align-items-center">
+											<div class="avatar avatar-sm">
+												<img src="{{ $item->complaint->avatar() }}" alt="Resident Avatar" />
+											</div>
+											<div class="d-flex flex-column ms-2">
+												<p class="fw-bolder mb-0 fs-14">{{ $item->complaint->fullname }}</p>
+												<span>
+													Age:
+													<span class="badge bg-danger">{{ $item->complaint->age }}</span>
+													Gender: 
+													<span class="text-default">{{ $item->complaint->gender }}</span>
+												</span>
+											</div>
+										</div>
+									</td>
+									<td>
+										<div class="d-flex justify-content-start align-items-center">
+											<div class="avatar avatar-sm">
+												<img src="{{ $item->respondent->avatar() }}" alt="Resident Avatar" />
+											</div>
+											<div class="d-flex flex-column ms-2">
+												<p class="fw-bolder mb-0 fs-14">{{ $item->respondent->fullname }}</p>
+												<span>
+													Age:
+													<span class="badge bg-danger">{{ $item->respondent->age }}</span>
+													Gender: 
+													<span class="text-default">{{ $item->respondent->gender }}</span>
+												</span>
+											</div>
+										</div>
+									</td>
+									<td class="align-middle">
+										@if($item->involvesArray() > 0)
+										@foreach ($item->involvesArray() as $involve)
+											<span class="badge fs-12 bg-outline-secondary mb-1">{{ $involve }}</span>								
+										@endforeach
+										@else
+											<span class="badge fs-12 bg-outline-secondary">None</span>
+										@endif
+									</td>
+									<td>
+										<span class="badge fs-12 bg-outline-primary">{{ $item->incident_date->format("F d, Y") }}</span>
+									</td>
+									<td>
+										<span class="badge fs-12 bg-outline-primary">{{ $item->date_hearing?->format("F d, Y") }}</span>
+									</td>
+									<td>
+										<span class="badge fs-12 bg-{{ $item->color() }}">{{ $item->status }}</span>
+									</td>
+									<td class="align-middle">
+										@can("resident-index")
+											<a href="{{ route("residents.show", $item->complainant_id) }}"
+												class="btn btn-icon btn-sm btn-primary btn-wave waves-light"
+												data-bs-toggle="tooltip" data-bs-placement="top" title="View {{ $item->complaint->fullname }}"
+												>
+												<i class="ti ti-eye fs-16"></i>
+											</a>
+										@endcan
+										@can("blotter-update")
+											<a href="{{ route("blotters.edit", $item->id) }}"
+												class="btn btn-icon btn-sm btn-success btn-wave waves-light"
+												data-bs-toggle="tooltip" data-bs-placement="top" title="Edit {{ $item->complaint->fullname }}"
+											>
+											<i class="ti ti-edit fs-16"></i>
+										</a>
+										@endcan
+										@can("blotter-delete")
+											<button type="button"
+												data-route="{{ route("blotters.destroy", $item->id) }}"
+												data-title="{{ $item->complaint->fullname }}"
+												class="delete btn btn-icon btn-sm btn-danger btn-wave waves-light"
+												data-bs-toggle="tooltip" data-bs-placement="top" title="Delete {{ $item->complaint->fullname }}"
+											>
+											<i class="ti ti-trash fs-16"></i>
+										</button>
+										@endcan
+									</td>
+								</tr>
+							@endforeach
+						</tbody>
 					</table>
 				</div>
 			</div>

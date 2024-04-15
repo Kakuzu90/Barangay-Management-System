@@ -63,7 +63,7 @@
 							data-bs-auto-close="outside" aria-expanded="false">
 							<div class="d-flex align-items-center">
 								<div class="me-xxl-2 me-0">
-									<img src="{{ asset("assets/images/avatar/administrator.png") }}" alt="img" width="32" height="32" class="rounded-circle" />
+									<img src="{{ Auth::user()->resident->avatar() }}" alt="img" width="32" height="32" class="rounded-circle" />
 								</div>
 								<div class="d-xxl-block d-none my-auto">
 									<h6 class="fw-semibold mb-0 lh-1 fs-14">{{ auth()->user()->resident->fullname }}</h6>
@@ -75,14 +75,14 @@
 						<ul class="main-header-dropdown dropdown-menu pt-0 header-profile-dropdown dropdown-menu-end" aria-labelledby="mainHeaderProfile">
 							<li class="drop-heading d-block">
 								<div class="text-center">
-									<img src="{{ asset("assets/images/avatar/administrator.png") }}" alt="img" width="50" height="50" class="rounded-circle" />
+									<img src="{{ Auth::user()->resident->avatar() }}" alt="img" width="50" height="50" class="rounded-circle" />
 									<h5 class="text-dark mt-2 mb-0 fs-14 fw-semibold">{{ auth()->user()->resident->fullname }}</h5>
 									<small class="text-danger">{{ auth()->user()->position->name }}</small>
 							 	</div>
 					 		</li>
 							@can("profile-settings")
 							<li class="dropdown-item">
-								<a class="d-flex w-100" href="#">
+								<a class="d-flex w-100" href="{{ route("account-settings.index") }}">
 									<i class="ti ti-user-circle fs-18 me-2 text-primary"></i>
 									Account Settings
 								</a>
@@ -90,7 +90,7 @@
 							@endcan
 							@can("system-settings")
 							<li class="dropdown-item">
-								<a class="d-flex w-100" href="#">
+								<a class="d-flex w-100" href="{{ route("system-settings.index") }}">
 									<i class="ti ti-settings fs-18 me-2 text-primary"></i>
 									System Settings
 								</a>

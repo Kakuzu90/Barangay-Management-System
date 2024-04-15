@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Official;
+use App\Models\Position;
 use App\Models\Purok;
 use App\Models\Resident;
 use App\Rules\UniqueEntry;
@@ -14,9 +15,10 @@ class ProfileController extends Controller
 	public function index(Request $request)
 	{
 		abort_if($request->user()->cannot("profile-settings"), 403);
-		$user = Auth::user();
-		$puroks = Purok::latest()->get();
-		return view("pages.profile", compact("user", "puroks"));
+		$data["user"] = Auth::user();
+		$data["puroks"] = Purok::latest()->get();
+		$data["positions"] = Position::exceptAdmin()->latest()->get();
+		return view("pages.profile", compact("data"));
 	}
 
 	public function general(Request $request)
@@ -93,7 +95,7 @@ class ProfileController extends Controller
 		abort_if($request->user()->cannot("profile-settings"), 403);
 		$request->validate([
 			"username" => ["required", new UniqueEntry("officials", "username", Auth::id())],
-			"position" => "required|numeric",
+			"position" => "nullable|numeric",
 			"password" => "required"
 		]);
 
@@ -101,11 +103,17 @@ class ProfileController extends Controller
 			return goBackWith()->withErrors(["verify_password" => "The password is incorrect, please try again!"]);
 		}
 
+		$array = [
+			"username" => $request->username
+		];
+
+		if ($request->filled("position")) {
+			$array["position_id"] = $request->position;
+			$array["account_status"] = 1;
+		}
+
 		$official = Official::where("id", Auth::id())->first();
-		$official->update([
-			"username" => $request->username,
-			"position_id" => $request->position
-		]);
+		$official->update($array);
 
 		if ($official->wasChanged()) {
 			$msg = ["Account Updated", "You have successfully updated your account's credentials."];
@@ -137,6 +145,31 @@ class ProfileController extends Controller
 		]);
 
 		$msg = ["Password Changed", "You have successfully changed your account's password."];
+		return goBackWith("success", $msg);
+	}
+
+	public function avatar(Request $request)
+	{
+		abort_if($request->user()->cannot("profile-settings"), 403);
+		$request->validate([
+			"profile" => "required"
+		]);
+
+		if ($request->filled("profile")) {
+			$image = $request->profile;
+			list(, $image) = explode(';', $image);
+			list(, $image) = explode(',', $image);
+			$image = base64_decode($image);
+
+			$filename = Auth::user()->resident->id . ".png";
+			$path = storage_path('app/public/profile/' . $filename);
+			if (file_exists($path)) {
+				unlink($path);
+			}
+			file_put_contents($path, $image);
+		}
+
+		$msg = ["Profile Changed", "You have successfully changed your account's profile."];
 		return goBackWith("success", $msg);
 	}
 }

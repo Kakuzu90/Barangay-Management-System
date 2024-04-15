@@ -46,17 +46,22 @@ class BlotterController extends Controller
 			"date_hearing" => "nullable|date|date_format:Y-m-d",
 			"incident_location" => "required",
 			"incident_date" => "required|date|date_format:Y-m-d",
-			"status" => "required",
 		]);
+
+		if ($request->filled("involves")) {
+			$decode = json_decode($request->involves, true);
+			$value = array_column($decode, "value");
+			$implode = implode(",", $value);
+		}
 
 		Blotter::create([
 			"complainant_id" => $request->complaint,
 			"respondent_id" => $request->respondent,
-			"involves" => $request->involves,
+			"involves" => $implode,
 			"date_hearing" => $request->date_hearing,
 			"incident_location" => $request->incident_location,
 			"incident_date" => $request->incident_date,
-			"status" => $request->status
+			"status" => "New"
 		]);
 
 		$msg = ["Blotter Added", "New blotter has been successfully added."];
@@ -111,7 +116,6 @@ class BlotterController extends Controller
 		$array = [
 			"complainant_id" => $request->complaint,
 			"respondent_id" => $request->respondent,
-			"involves" => $request->involves,
 			"date_hearing" => $request->date_hearing,
 			"incident_location" => $request->incident_location,
 			"incident_date" => $request->incident_date,
@@ -120,7 +124,10 @@ class BlotterController extends Controller
 		];
 
 		if ($request->filled("involves")) {
-			$array["involves"] = $request->involves;
+			$decode = json_decode($request->involves, true);
+			$value = array_column($decode, "value");
+			$implode = implode(",", $value);
+			$array["involves"] = $implode;
 		}
 
 		$blotter->update($array);

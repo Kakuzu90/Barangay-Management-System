@@ -54,5 +54,14 @@
 				rtl: false,
 			})
 		@enderror
+		@error("password")
+		Toast.notify("<h5>Password Field Error</h5><p>{{ $message }}</p>", "error", {
+				positionClass: "toast-top-center",
+				closeButton: true,
+				tapToDismiss: false,
+				progressBar: true,
+				rtl: false,
+			})
+		@enderror
 	});
 </script>
