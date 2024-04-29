@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Position;
+use App\Models\Purok;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -90,5 +91,19 @@ if (!function_exists("getPriorityRange")) {
 	function getPriorityRange()
 	{
 		return Position::count();
+	}
+}
+
+if (!function_exists("getPurok")) {
+	function getPurok()
+	{
+		return Purok::latest()->get();
+	}
+}
+
+if (!function_exists("getPurokById")) {
+	function getPurokById($id)
+	{
+		return Purok::findOrFail($id)?->name;
 	}
 }

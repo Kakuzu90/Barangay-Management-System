@@ -8,6 +8,7 @@ use App\Models\Position;
 use App\Rules\UniqueEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class OfficialController extends Controller
 {

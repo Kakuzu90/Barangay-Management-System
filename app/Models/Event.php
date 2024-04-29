@@ -20,6 +20,6 @@ class Event extends Model
 	];
 
 	protected $casts = [
-		"deleted_at" => "date"
+		"deleted_at" => "date",
 	];
 }

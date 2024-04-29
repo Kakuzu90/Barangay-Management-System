@@ -85,7 +85,7 @@
 					<div class="avatar avatar-xxl avatar-rounded">
 						<img src="{{ asset("assets/images/avatar/administrator.png") }}" alt="Avatar" />
 					</div>
-					<h5 class="text-default mb-0 mt-2">No Current Active Purok Leaders Available</h5>
+					<h5 class="text-default mb-0 mt-2">No Current Active Barangay Officials Available</h5>
 				</div>
 			</div>
 		</div>

@@ -17,7 +17,7 @@ class PositionController extends Controller
 	public function index(Request $request)
 	{
 		abort_if($request->user()->cannot("position-index"), 403);
-		$positions = Position::exceptAdmin()->latest()->get();
+		$positions = Position::exceptImportant()->latest()->get();
 		return view("pages.position", compact("positions"));
 	}
 

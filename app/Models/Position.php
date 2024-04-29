@@ -33,6 +33,11 @@ class Position extends Model
 		return $query->where("id", "!=", 1); // 1 is for admin position
 	}
 
+	public function scopeExceptImportant($query)
+	{
+		return $query->whereNotIn("id", [1, 2]);
+	}
+
 	public function setNameAttribute($value)
 	{
 		return $this->attributes["name"] = strtolower($value);

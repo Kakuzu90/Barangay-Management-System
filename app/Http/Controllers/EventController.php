@@ -32,13 +32,17 @@ class EventController extends Controller
 		$request->validate([
 			"title" => "required",
 			"body" => "required",
-			"for" => "required"
+			"for" => "required|array"
 		]);
+
+		if ($request->filled("notify")) {
+			// send sms notification here
+		}
 
 		Event::create([
 			"title" => $request->title,
 			"body" => $request->body,
-			"for" => $request->for,
+			"for" => json_encode($request->for),
 		]);
 
 		$msg = ["Event Added", "New event has been successfully added."];
@@ -55,7 +59,11 @@ class EventController extends Controller
 	public function show(Request $request, Event $event)
 	{
 		abort_if($request->user()->cannot("event-index"), 403);
-		return $event;
+		return [
+			"title" => $event->title,
+			"body" => $event->body,
+			"for" => json_decode($event->for),
+		];
 	}
 
 	/**
@@ -71,13 +79,17 @@ class EventController extends Controller
 		$request->validate([
 			"title" => "required",
 			"body" => "required",
-			"for" => "required"
+			"for" => "required|array"
 		]);
+
+		if ($request->filled("notify")) {
+			// send sms notification here
+		}
 
 		$event->update([
 			"title" => $request->title,
 			"body" => $request->body,
-			"for" => $request->for,
+			"for" => json_encode($request->for),
 		]);
 
 		if ($event->wasChanged()) {

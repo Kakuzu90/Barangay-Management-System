@@ -7,6 +7,7 @@ use App\Models\Resident;
 use App\Rules\UniqueEntry;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ResidentController extends Controller
 {
@@ -18,7 +19,7 @@ class ResidentController extends Controller
 	public function index(Request $request)
 	{
 		abort_if($request->user()->cannot("resident-index"), 403);
-		$data["residents"] = Resident::exceptAdmin()->latest()->get();
+		$data["residents"] = Resident::exceptAdmin()->where("id", "!=", Auth::user()->resident_id)->latest()->get();
 		return view("pages.resident.index", compact("data"));
 	}
 
