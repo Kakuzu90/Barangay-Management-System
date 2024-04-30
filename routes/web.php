@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BlotterController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\DashboardController;
@@ -27,9 +28,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware("guest")->controller(AuthController::class)->group(function () {
-	Route::get("", "index")->name("login");
-	Route::post("login/stored", "login")->name("login.stored");
+Route::middleware("guest")->group(function () {
+	Route::controller(AuthController::class)->group(function () {
+		Route::get("", "index")->name("login");
+		Route::post("login/stored", "login")->name("login.stored");
+	});
+	Route::controller(RegisterController::class)->group(function () {
+		Route::get("sign-up", "index")->name("sign-up.index");
+		Route::post("sign-up/stored", "store")->name("sign-up.store");
+	});
 });
 
 Route::middleware("auth")->group(function () {
@@ -54,6 +61,12 @@ Route::middleware("auth")->group(function () {
 		Route::get("large-cattle-certificate", "cattle")->name("cattle");
 		Route::get("residence-certificate", "residence")->name("residence");
 		Route::get("residence-sports-certificate", "sports")->name("sports");
+
+		Route::post("clearance-certificate/generate", "storeIndex")->name("store");
+		Route::post("birth-certificate/generate", "storeBirth")->name("store.birth");
+		Route::post("large-cattle-certificate/generate", "storeCattle")->name("store.cattle");
+		Route::post("residence-certificate/generate", "storeResidence")->name("store.residence");
+		Route::post("residence-sports-certificate/generate", "storeSports")->name("store.sports");
 	});
 	Route::get("transactions", [TransactionController::class, "index"])->name("transactions.index");
 	Route::controller(SettingController::class)->prefix("system-settings")->as("system-settings.")->group(function () {

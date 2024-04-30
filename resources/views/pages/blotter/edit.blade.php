@@ -99,7 +99,7 @@
 						type="text" name="involves"
 						value="{{ $blotter->involves }}"
 						class="tagify form-control h-auto" 
-						placeholder="Type the name here and press enter"
+						placeholder="Type the last name here and press enter"
 						aria-label="Involves Tagify"
 						/>
 				</div>

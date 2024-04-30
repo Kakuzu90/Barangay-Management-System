@@ -73,22 +73,22 @@
 													<span class="text-default">{{ $item->resident->gender }}</span>
 												</span>
 												<p class="mb-0">
-													<span>Purok: </span> <span class="badge bg-primary">{{ $item->resident->purok->name }}</span>
+													<span>Purok: </span> <span class="badge bg-primary">{{ $item->resident->purok->name ?? '-' }}</span>
 												</p>
 											</div>
 										</div>
 									</td>
 									<td>
-										<span>{{ $item->resident->phone_number }}</span>
+										<span>{{ $item->resident->phone_number ?? '-' }}</span>
 									</td>
 									<td>
 										<span class="badge fs-12 bg-primary">{{ $item->position->name }}</span>
 									</td>
 									<td>
-										<span class="text-dark">{{ $item->term_from->format("F d, Y") }}</span>
+										<span class="text-dark">{{ $item->term_from?->format("F d, Y") ?? '-' }}</span>
 									</td>
 									<td>
-										<span class="text-dark">{{ $item->term_to->format("F d, Y") }}</span>
+										<span class="text-dark">{{ $item->term_to?->format("F d, Y") ?? '-' }}</span>
 									</td>
 									<td>
 										<span class="badge fs-12 bg-{{ $item->color() }}">{{ $item->text() }}</span>

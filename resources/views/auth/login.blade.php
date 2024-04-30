@@ -55,7 +55,7 @@
 					<span>OR</span>
 				</div>
 				<div class="text-center">
-					<p class="text-muted mt-3">Dont have an account? <a href="sign-up.html" class="text-primary">Sign Up</a></p>
+					<p class="text-muted mt-3">Dont have an account? <a href="{{ route("sign-up.index") }}" class="text-primary">Sign Up</a></p>
 				</div>
 			</form>
 			</div>

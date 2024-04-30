@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Purok;
+use App\Models\Blotter;
 use App\Models\Resident;
 use App\Rules\UniqueEntry;
 use Illuminate\Http\Request;
@@ -109,7 +110,11 @@ class ResidentController extends Controller
 	public function show(Request $request, Resident $resident)
 	{
 		abort_if($request->user()->cannot("resident-show"), 403);
-		return view("pages.resident.show", compact("resident"));
+		$cases = Blotter::where(function ($query) use ($resident) {
+			$query->where("complainant_id", $resident->id)
+				->orWhere("respondent_id", $resident->id);
+		})->latest()->get();
+		return view("pages.resident.show", compact("resident", "cases"));
 	}
 
 	public function ajax(Request $request, Resident $resident)

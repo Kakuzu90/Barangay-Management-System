@@ -79,7 +79,7 @@
 										<span>{{ $item->education_level }}</span>
 									</td>
 									<td>
-										<span class="badge bg-primary fs-12">{{ $item->purok->name }}</span>
+										<span class="badge bg-primary fs-12">{{ $item->purok->name ?? '-' }}</span>
 									</td>
 									<td class="align-middle">
 										@can("resident-index")

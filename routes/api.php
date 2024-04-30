@@ -20,4 +20,5 @@ Route::as("api.")->middleware("auth")->group(function () {
 
 	Route::get("resident/search", [SearchController::class, "search"])->name("search");
 	Route::get("resident/profile/{profile}", [AvatarController::class, "index"])->name("avatar");
+	Route::get("resident/case/{resident?}", [SearchController::class, "hasPending"])->name("case");
 });

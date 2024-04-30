@@ -65,6 +65,11 @@ class Official extends Authenticatable
 			->whereDate("term_to", ">=", Carbon::today());
 	}
 
+	public function scopeActiveCaptain($query)
+	{
+		return $query->active()->where("position_id", 2); // 2 for capitan or punong barangay id
+	}
+
 	public function text()
 	{
 		if (Carbon::now()->between($this->term_from, $this->term_to) && $this->account_status === 2) {

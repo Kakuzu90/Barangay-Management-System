@@ -93,7 +93,7 @@
 					<input 
 						type="text" name="involves" 
 						class="tagify form-control h-auto" 
-						placeholder="Type the name here and press enter"
+						placeholder="Type the last name here and press enter"
 						aria-label="Involves Tagify"
 						/>
 				</div>
