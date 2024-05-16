@@ -15,6 +15,7 @@ use App\Http\Controllers\ResidentController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SMSController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,9 +29,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get("", WelcomeController::class)->name("welcome");
+
 Route::middleware("guest")->group(function () {
 	Route::controller(AuthController::class)->group(function () {
-		Route::get("", "index")->name("login");
+		Route::get("login", "index")->name("login");
 		Route::post("login/stored", "login")->name("login.stored");
 	});
 	Route::controller(RegisterController::class)->group(function () {
@@ -52,7 +55,7 @@ Route::middleware("auth")->group(function () {
 	Route::resource("residents", ResidentController::class);
 	Route::get("purok-leaders/active", [PurokLeaderController::class, "active"])->name("purok-leaders.active");
 	Route::apiResource("purok-leaders", PurokLeaderController::class);
-	Route::resource("blotters", BlotterController::class)->except("show");
+	Route::resource("blotters", BlotterController::class);
 	Route::get("officials/active", [OfficialController::class, "active"])->name("officials.active");
 	Route::apiResource("officials", OfficialController::class);
 	Route::controller(CertificateController::class)->prefix("certificate")->as("certificate.")->group(function () {

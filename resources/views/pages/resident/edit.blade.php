@@ -92,9 +92,9 @@
 
 				<div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
 					<label class="form-label fs-14 text-dark">
-						Middle Name <span class="fw-bold text-danger">*</span>
+						Middle Name
 					</label>
-					<input value="{{ $resident->middle_name }}" type="text" name="middle_name" class="form-control @error('middle_name') is-invalid @enderror" placeholder="Enter middle name" required />
+					<input value="{{ $resident->middle_name }}" type="text" name="middle_name" class="form-control @error('middle_name') is-invalid @enderror" placeholder="Enter middle name" />
 					@error("middle_name")
 						<div class="invalid-feedback">
 							{{ $message }}

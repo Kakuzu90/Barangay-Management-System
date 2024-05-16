@@ -8,7 +8,7 @@
 @section("content")
 	<div class="col-xxl-4 col-xl-5 col-lg-5 col-md-6 col-sm-8 col-12">
 		<div class="my-4 d-flex justify-content-center">
-			<a href="{{ route("login") }}">
+			<a href="{{ route("welcome") }}">
 				<img src="{{ asset("favicon.png") }}" height="75" alt="Brand Logo"/>
 			</a>
 		</div>

@@ -29,7 +29,7 @@ class PositionsPermissions extends Seeder
 			"dashboard-index",
 			"event-index", "purok-leader-index", "resident-index", "resident-store",
 			"resident-update", "resident-delete", "resident-show", "blotter-index",
-			"blotter-store", "blotter-update", "blotter-delete", "barangay-official-index",
+			"blotter-store", "blotter-update", "blotter-delete", "blotter-show", "barangay-official-index",
 			"clearance-certificate", "birth-certificate", "large-cattle-certificate", "residence-certificate",
 			"residence-sports-certificate", "profile-settings"
 		])->get();
@@ -37,13 +37,13 @@ class PositionsPermissions extends Seeder
 		$sk_chairman_permissions = Permission::whereIn("slug", [
 			"dashboard-index",
 			"event-index", "purok-leader-index", "resident-index", "resident-store",
-			"resident-update", "barangay-official-index", "blotter-index"
+			"resident-update", "barangay-official-index", "blotter-index", "blotter-show"
 		])->get();
 
 		$sk_kagawad_permissions = Permission::whereIn("slug", [
 			"dashboard-index",
 			"event-index", "purok-leader-index", "resident-index",
-			"barangay-official-index", "blotter-index"
+			"barangay-official-index", "blotter-index", "blotter-show"
 		])->get();
 
 		$capitan->permissions()->saveMany($capitan_permissions);

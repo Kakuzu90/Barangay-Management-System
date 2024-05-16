@@ -28,12 +28,18 @@ class OfficialController extends Controller
 	public function active(Request $request)
 	{
 		abort_if($request->user()->cannot("barangay-official-index"), 403);
-		$officials = Official::exceptAdmin()
-			->active()
-			->with("position")
+		$year = $request->input("year");
+		$query = Official::exceptAdmin();
+		if ($year) {
+			$query->whereYear("term_to", $year);
+		} else {
+			$query->active();
+		}
+		$officials = $query->with("position")
 			->get()->sortBy(function ($official) {
 				return $official->position->priority;
 			});
+
 		$officials = $officials->values()->all();
 		return view("pages.official.active", compact("officials"));
 	}

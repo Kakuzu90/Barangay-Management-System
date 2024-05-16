@@ -40,6 +40,7 @@ class BlotterController extends Controller
 	public function store(Request $request)
 	{
 		abort_if($request->user()->cannot("blotter-store"), 403);
+		return $request;
 		$request->validate([
 			"complaint" => "required|numeric",
 			"respondent" => "required|numeric",
@@ -77,8 +78,8 @@ class BlotterController extends Controller
 	 */
 	public function show(Request $request, Blotter $blotter)
 	{
-		abort_if($request->user()->cannot("blotter-index"), 403);
-		return $blotter;
+		abort_if($request->user()->cannot("blotter-show"), 403);
+		return view("pages.blotter.show", compact("blotter"));
 	}
 
 	/**

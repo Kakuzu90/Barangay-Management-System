@@ -23,6 +23,18 @@ class Purok extends Model
 		return $this->hasMany(Resident::class);
 	}
 
+	public function countMale()
+	{
+		$str = strtolower("Male");
+		return $this->residents()->where("gender", $str)->count();
+	}
+
+	public function countFemale()
+	{
+		$str = strtolower("Female");
+		return $this->residents()->where("gender", $str)->count();
+	}
+
 	public function setNameAttribute($value)
 	{
 		return $this->attributes["name"] = strtolower($value);

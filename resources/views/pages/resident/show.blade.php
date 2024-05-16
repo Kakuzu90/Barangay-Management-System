@@ -47,7 +47,7 @@
 								</span> 
 								<span class="d-inline-flex align-items-center">
 									<i class="ti ti-map-pin me-1 align-middle"></i>
-									{{ $resident->purok->name }}
+									{{ $resident->purok->name ?? '-' }}
 								</span> 
 							</p>
 						</div>

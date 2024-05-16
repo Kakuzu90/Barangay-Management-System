@@ -27,7 +27,7 @@
 				<div class="card-body p-5">
 						<div class="row">
 								<div class="col-xl-6 my-auto">
-										<h2 class="fw-bold text-primary">Barangay Nangka Mission</h2>
+										<h2 class="fw-bold text-primary">Mission</h2>
 										<p class="mb-0">{!! $data["mission"] !!}</p>
 								</div>
 								<div class="col-xl-6 mt-xl-0 mt-5">
@@ -52,7 +52,7 @@
 										</div>
 								</div>
 								<div class="col-xl-6 my-auto">
-									<h2 class="fw-bold text-primary">Barangay Nangka Vision</h2>
+									<h2 class="fw-bold text-primary">Vision</h2>
 									<p class="mb-0">{!! $data["vision"] !!}</p>
 								</div>
 						</div>

@@ -25,7 +25,14 @@ class PurokLeaderController extends Controller
 	public function active(Request $request)
 	{
 		abort_if($request->user()->cannot("purok-leader-index"), 403);
-		$data["leaders"] = PurokLeader::active()->orderBy("purok_id", "asc")->get();
+		$year = $request->input("year");
+		$query = PurokLeader::query();
+		if ($year) {
+			$query->whereYear("term_to", $year);
+		} else {
+			$query->active();
+		}
+		$data["leaders"] = $query->orderBy("purok_id", "asc")->get();
 		return view("pages.purok-leader.active", compact("data"));
 	}
 

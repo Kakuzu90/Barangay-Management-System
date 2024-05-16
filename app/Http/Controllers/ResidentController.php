@@ -47,7 +47,6 @@ class ResidentController extends Controller
 		abort_if($request->user()->cannot("resident-store"), 403);
 		$request->validate([
 			"first_name" => "required",
-			"middle_name" => "required",
 			"last_name" => "required",
 			"phone_number" => ["required", new UniqueEntry("residents", "phone_number")],
 			"date_birth" => "required|date|date_format:Y-m-d",
@@ -148,7 +147,6 @@ class ResidentController extends Controller
 		abort_if($request->user()->cannot("resident-update"), 403);
 		$request->validate([
 			"first_name" => "required",
-			"middle_name" => "required",
 			"last_name" => "required",
 			"phone_number" => ["required", new UniqueEntry("residents", "phone_number", $resident->id)],
 			"date_birth" => "required|date|date_format:Y-m-d",

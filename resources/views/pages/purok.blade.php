@@ -45,6 +45,8 @@
 							<tr>
 								<th>Purok Name</th>
 								<th>Residents</th>
+								<th>Male</th>
+								<th>Female</th>
 								<th>Tools</th>
 							</tr>
 						</thead>
@@ -56,6 +58,12 @@
 									</td>
 									<td>
 										<span class="badge bg-outline-dark fs-11">{{ $item->residents->count() }}</span>
+									</td>
+									<td>
+										<span>{{ $item->countMale() }}</span>
+									</td>
+									<td>
+										<span>{{ $item->countFemale() }}</span>
 									</td>
 									<td class="align-middle">
 										@can("purok-update")
