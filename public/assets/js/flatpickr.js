@@ -5,3 +5,12 @@ $(".flatpickr-human-friendly").each(function() {
 			dateFormat: "Y-m-d",
 	});
 });
+
+$(".timepicker").each(function() {
+	console.log("Element: ", this)
+	flatpickr(this, {
+		enableTime: true,
+		noCalendar: true,
+		dateFormat: "G:i K",
+	});
+});

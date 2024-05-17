@@ -12,7 +12,7 @@ class Blotter extends Model
 	use HasFactory, HasDeletedScope;
 
 	protected $fillable = [
-		"complainant_id", "respondent_id", "involves",
+		"complainant_id", "respondent_id", "involves", "time_hearing",
 		"date_hearing", "incident_location", "incident_date",
 		"status", "results", "deleted_at"
 	];

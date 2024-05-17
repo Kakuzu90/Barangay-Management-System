@@ -18,6 +18,7 @@ class CreateBlottersTable extends Migration
 			$table->foreignId('complainant_id')->constrained('residents')->cascadeOnDelete();
 			$table->foreignId('respondent_id')->constrained('residents')->cascadeOnDelete();
 			$table->text('involves')->nullable();
+			$table->string('time_hearing')->nullable();
 			$table->date('date_hearing')->nullable();
 			$table->text('incident_location')->nullable();
 			$table->date('incident_date')->nullable();

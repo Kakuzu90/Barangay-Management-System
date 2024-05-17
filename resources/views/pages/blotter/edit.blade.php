@@ -43,7 +43,7 @@
 				</button>
 			</div>
 			<div class="card-body row g-3 mt-0">
-				<div class="col-xxl-4 col-md-6">
+				<div class="col-md-6">
 					<label class="form-label fs-14 text-dark">
 						Complainant Name <span class="fw-bold text-danger">*</span>
 					</label>
@@ -55,7 +55,7 @@
 					</select>
 				</div>
 
-				<div class="col-xxl-4 col-md-6">
+				<div class="col-md-6">
 					<label class="form-label fs-14 text-dark">
 						Respondent Name <span class="fw-bold text-danger">*</span>
 					</label>
@@ -93,6 +93,18 @@
 
 				<div class="col-xxl-4 col-md-6">
 					<label class="form-label fs-14 text-dark">
+						Time Hearing
+					</label>
+					<input value="{{ $blotter->time_hearing }}" type="text" name="time_hearing" class="form-control timepicker @error('time_hearing') is-invalid @enderror" placeholder="Choose a time" />
+					@error("time_hearing")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
+				</div>
+
+				<div class="col-12">
+					<label class="form-label fs-14 text-dark">
 						Involves
 					</label>
 					<input 
@@ -104,7 +116,7 @@
 						/>
 				</div>
 
-				<div class="col-xxl-4 col-md-6">
+				<div class="col-12">
 					<label class="form-label fs-14 text-dark">
 						Place of Incident <span class="fw-bold text-danger">*</span>
 					</label>
@@ -115,8 +127,20 @@
 						</div>
 					@enderror
 				</div>
+				
+				<div class="col-12">
+					<label class="form-label fs-14 text-dark">
+						Incident Summary <span class="fw-bold text-danger">*</span>
+					</label>
+					<textarea name="results" class="form-control @error('results') is-invalid @enderror" placeholder="Incident summary..." required>{{ $blotter->results }}</textarea>
+					@error("results")
+						<div class="invalid-feedback">
+							{{ $message }}
+						</div>
+					@enderror
+				</div>
 
-				<div class="col-xxl-4 col-md-6">
+				<div class="col-12">
 					<label class="form-label fs-14 text-dark">
 						Status <span class="fw-bold text-danger">*</span>
 					</label>
@@ -126,18 +150,6 @@
 						@endforeach
 					</select>
 					@error("status")
-						<div class="invalid-feedback">
-							{{ $message }}
-						</div>
-					@enderror
-				</div>
-				
-				<div class="col-xxl-8 col-md-6">
-					<label class="form-label fs-14 text-dark">
-						Incident Summary <span class="fw-bold text-danger">*</span>
-					</label>
-					<textarea name="results" class="form-control @error('results') is-invalid @enderror" placeholder="Incident summary..." required>{{ $blotter->results }}</textarea>
-					@error("results")
 						<div class="invalid-feedback">
 							{{ $message }}
 						</div>

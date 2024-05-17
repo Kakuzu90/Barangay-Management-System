@@ -111,7 +111,7 @@
 							@endforeach
 						</select>
 					</div>
-					<button type="submit" class="btn btn-sm btn-primary">Apply Year</button>
+					<button type="submit" class="btn btn-sm btn-primary btn-wave waves-light">Apply Year</button>
 				</form>
 			</div>
 		</div>

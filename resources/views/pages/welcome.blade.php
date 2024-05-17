@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="{{ asset("assets/css/styles.min.css") }}">
 	<link rel="stylesheet" href="{{ asset("assets/css/icons.min.css") }}">
 	<link rel="stylesheet" href="{{ asset("assets/libs/node-waves/waves.min.css") }}">
+	<link rel="stylesheet" href="{{ asset("assets/libs/select2/select2.min.css") }}">
 	
 </head>
 <body class="landing-body">
@@ -155,7 +156,7 @@
 							</div>
 						</div>
 						<div class="col-xxl-5 col-xl-5 col-lg-5 my-auto text-start pt-5 pb-0 px-lg-2 px-5">
-								
+							{!! $data["mission"] !!}
 						</div>
 				</div>
 			</section>
@@ -169,7 +170,7 @@
 				</div>
 				<div class="row justify-content-center align-items-center g-0">
 					<div class="col-xxl-5 col-xl-5 col-lg-5 my-auto text-start pt-5 pb-0 px-lg-2 px-5">
-								
+						{!! $data["vision"] !!}
 					</div>
 					<div class="col-xxl-5 col-xl-5 col-lg-5 customize-image text-center">
 						<div class="text-lg-end">
@@ -179,20 +180,95 @@
 				</div>
 			</section>
 
+			<section class="section section-bg" id="official">
+				<div class="container text-center">
+					<p class="fs-18 fw-medium mb-1">
+						<span class="landing-section-heading">List of Officials</span>
+					</p>
+					<span class="landing-title"></span>
+					@if (count($data["officials"]) > 0)
+					<form action="{{ route("welcome") }}" method="GET" class="mb-3">
+						<div class="mb-2 col-md-3 mx-auto">
+							<select name="year" class="select2-icon form-control" data-select-placeholder="Select a year" required>
+								@foreach (officialLeader() as $item)
+										<option value="{{ $item->year }}" data-icon="ti ti-calendar">{{ $item->year }}</option>
+								@endforeach
+							</select>
+						</div>
+						<button type="submit" class="btn btn-sm btn-primary btn-wave waves-light">Apply Year</button>
+					</form>
+					@endif
+					<div class="row justify-content-center">
+						@forelse ($data["officials"] as $item)
+						<div class="col-xl-4 col-md-6">
+							<div class="card custom-card">
+								<div class="card-body team-card">
+									<div class="text-center">
+										<span class="avatar avatar-xxl avatar-rounded team-avatar">
+											<img src="{{ $item->resident->avatar() }}" alt="Resident Avatar" class="rounded-circle" />
+										</span>
+									</div>
+									<div class="d-flex text-center justify-content-between mt-1 mb-1">
+										<div class="flex-fill">
+											<p class="mb-1 fw-semibold fs-16 max-w-150 mx-auto">
+												<a href="{{ route("residents.show", $item->resident_id) }}">{{ $item->resident->fullname }}</a>
+											</p>
+											<p class="mb-1 fs-12 text-muted max-w-150 mx-auto">
+												<span class="text-dark">
+													<b>Gender:</b> 
+													<span>
+														{{ $item->resident->gender }}
+													</span>
+												</span>
+												<span class="text-dark ms-2">
+													<b>Age:</b> 
+													<span>
+														{{ $item->resident->age }}
+													</span>
+												</span>
+											</p>
+											<p class="mb-0 fs-13 text-dark max-w-150 mx-auto">{{ $item->resident->phone_number }}</p>
+										</div>
+									</div>
+									<div class="text-center">
+										<span class="badge bg-primary fs-12">{{ $item->position->name }}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						@empty
+						<div class="col-lg-5 mx-auto">
+							<div class="card custom-card">
+								<div class="card-body text-center">
+									<div class="avatar avatar-xxl avatar-rounded">
+										<img src="{{ asset("assets/images/avatar/administrator.png") }}" alt="Avatar" />
+									</div>
+									<h5 class="text-default mb-0 mt-2">No Current Active Barangay Officials Available</h5>
+								</div>
+							</div>
+						</div>
+						@endforelse
+					</div>
+				</div>
+			</section>
+
 		</div>
 
 	</div>
 
 	<div class="scrollToTop">
-		<span class="arrow"><i class="ri-arrow-up-s-fill fs-20"></i></span>
+		<span class="arrow"><i class="ti ti-arrow-up fs-20"></i></span>
 	</div>
 	<div id="responsive-overlay"></div>
 	
+	<script src="{{ asset("assets/libs/jquery/jquery.min.js") }}"></script>
 	<script src="{{ asset("assets/libs/@popperjs/core/umd/popper.min.js") }}"></script>
 	<script src="{{ asset("assets/libs/bootstrap/js/bootstrap.bundle.min.js") }}"></script>
 	<script src="{{ asset("assets/js/defaultmenu.min.js") }}"></script>
 	<script src="{{ asset("assets/js/landing.js") }}"></script>
 	<script src="{{ asset("assets/js/sticky.js") }}"></script>
 	<script src="{{ asset("assets/libs/node-waves/waves.min.js") }}"></script>
+	<script src="{{ asset("assets/libs/select2/select2.min.js") }}"></script>
+	<script src="{{ asset("assets/js/select.js") }}"></script>
 </body>
 </html>

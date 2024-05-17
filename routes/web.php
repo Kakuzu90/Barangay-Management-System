@@ -55,6 +55,7 @@ Route::middleware("auth")->group(function () {
 	Route::resource("residents", ResidentController::class);
 	Route::get("purok-leaders/active", [PurokLeaderController::class, "active"])->name("purok-leaders.active");
 	Route::apiResource("purok-leaders", PurokLeaderController::class);
+	Route::get("blotters/{blotter}/generate", [BlotterController::class, "generate"])->name("blotters.generate");
 	Route::resource("blotters", BlotterController::class);
 	Route::get("officials/active", [OfficialController::class, "active"])->name("officials.active");
 	Route::apiResource("officials", OfficialController::class);

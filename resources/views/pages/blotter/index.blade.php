@@ -109,8 +109,16 @@
 										<span class="badge fs-12 bg-{{ $item->color() }}">{{ $item->status }}</span>
 									</td>
 									<td class="align-middle">
+										@can("blotter-index")
+											<a href="{{ route("blotters.generate", $item->id) }}"
+												class="btn btn-icon btn-sm btn-dark btn-wave waves-light"
+												data-bs-toggle="tooltip" data-bs-placement="top" title="Download Summon"
+												>
+												<i class="ti ti-download fs-16"></i>
+											</a>
+										@endcan
 										@can("blotter-store")
-											<a href="{{ route("blotters.show", $item->complainant_id) }}"
+											<a href="{{ route("blotters.show", $item->id) }}"
 												class="btn btn-icon btn-sm btn-primary btn-wave waves-light"
 												data-bs-toggle="tooltip" data-bs-placement="top" title="View Blotter"
 												>
