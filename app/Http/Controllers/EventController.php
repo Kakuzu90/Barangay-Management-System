@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SendSmsNotificationBatch;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -35,15 +36,16 @@ class EventController extends Controller
 			"for" => "required|array"
 		]);
 
-		if ($request->filled("notify")) {
-			// send sms notification here
-		}
-
 		Event::create([
 			"title" => $request->title,
 			"body" => $request->body,
 			"for" => json_encode($request->for),
 		]);
+
+		if ($request->filled("notify")) {
+			$message = "WHAT:" . $request->title . "\n\nCONTENT:" . $request->body . "\n\nRegards,\nBrgy. Nangka";
+			SendSmsNotificationBatch::dispatch($request->for, $message);
+		}
 
 		$msg = ["Event Added", "New event has been successfully added."];
 
@@ -82,15 +84,16 @@ class EventController extends Controller
 			"for" => "required|array"
 		]);
 
-		if ($request->filled("notify")) {
-			// send sms notification here
-		}
-
 		$event->update([
 			"title" => $request->title,
 			"body" => $request->body,
 			"for" => json_encode($request->for),
 		]);
+
+		if ($request->filled("notify")) {
+			$message = "WHAT:" . $request->title . "\n\nCONTENT:" . $request->body . "\n\nRegards,\nBrgy. Nangka";
+			SendSmsNotificationBatch::dispatch($request->for, $message);
+		}
 
 		if ($event->wasChanged()) {
 			$msg = ["Event Updated", "The event has been successfully updated."];

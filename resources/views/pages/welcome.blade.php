@@ -135,7 +135,7 @@
 								</a>
 							</div>
 							<div class="col-xl-6 col-lg-6 my-auto text-end">
-								<img src="{{ asset("assets/images/landing/background 1.jpg") }}" alt="Barangay" class="w-100" />
+								<img src="{{ asset("assets/images/landing/nangka.jpeg") }}" alt="Barangay" class="w-100" />
 							</div>
 						</div>
 					</div>
